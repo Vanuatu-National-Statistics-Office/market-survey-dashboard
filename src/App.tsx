@@ -926,6 +926,14 @@ const produceValueOptions: Highcharts.Options = {
   <Download size={17} />
   Download Excel
 </a>
+<a
+  href={`${import.meta.env.BASE_URL}downloads/VBoS-Market-Survey.apk`}
+  download
+  className="action-button android-button"
+>
+  <Download size={17} />
+  Download Android App
+</a>
 
              <button
   type="button"

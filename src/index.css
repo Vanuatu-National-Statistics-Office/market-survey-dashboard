@@ -1694,3 +1694,13 @@ html[data-theme='dark'] .highcharts-data-label text {
     width: 100%;
   }
 }
+.android-button {
+  background: #2e7d32;
+  color: #ffffff;
+  border-color: #2e7d32;
+}
+
+.android-button:hover {
+  background: #256b2a;
+  border-color: #256b2a;
+}
