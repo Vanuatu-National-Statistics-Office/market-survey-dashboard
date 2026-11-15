@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">VBoS Market Survey</string>
+    <string name="title_activity_main">VBoS Market Survey</string>
+    <string name="package_name">vu.gov.vbos.marketsurvey</string>
+    <string name="custom_url_scheme">vu.gov.vbos.marketsurvey</string>
+</resources>

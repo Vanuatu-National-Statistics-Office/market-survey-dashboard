@@ -1,3 +1,4 @@
+import vbosLogo from './assets/VBoS_logo.png'
 import { useEffect, useState } from 'react'
 import Highcharts from 'highcharts'
 import { HighchartsReact } from 'highcharts-react-official'
@@ -29,9 +30,105 @@ import {
   Tags,
   Users,
   Wheat,
+  Menu,
+X,
 } from 'lucide-react'
 
 function App() {
+
+ 
+  const [selectedCommodity, setSelectedCommodity] =
+  useState<'all' | 'staple' | 'fruits' | 'vegetables'>('all')
+
+  const [activePage, setActivePage] =
+  useState<
+    | 'overview'
+    | 'staple'
+    | 'fruits'
+    | 'vegetables'
+    | 'value'
+    | 'tables'
+    | 'methodology'
+  >('overview')
+const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+const selectedGroupName =
+  selectedCommodity === 'staple'
+    ? 'STAPLE PRODUCE'
+    : selectedCommodity === 'fruits'
+      ? 'FRUITS'
+      : selectedCommodity === 'vegetables'
+        ? 'VEGETABLE PRODUCE'
+        : null
+
+const selectedCommodityLabel =
+  selectedCommodity === 'all'
+    ? null
+    : selectedCommodity === 'staple'
+      ? 'Staple Produce'
+      : selectedCommodity === 'fruits'
+        ? 'Fruits'
+        : 'Vegetables'
+        const overviewGroupData = [
+  {
+    name: 'Staple Produce',
+    key: 'STAPLE PRODUCE',
+  },
+  {
+    name: 'Fruits',
+    key: 'FRUITS',
+  },
+  {
+    name: 'Vegetables',
+    key: 'VEGETABLE PRODUCE',
+  },
+].map((group) => ({
+  name: group.name,
+  volume:
+    volumeIndexData.find((item) => item.produce === group.key)?.jun2026 ?? 0,
+  price:
+    priceIndexData.find((item) => item.produce === group.key)?.jun2026 ?? 0,
+  value:
+    valueOfSupplies.find((item) => item.produce === group.key)?.jun2026 ?? 0,
+  sellers:
+    sellersData.find((item) => item.produce === group.key)?.jun2026 ?? 0,
+}))
+
+const selectedVolumeRow = selectedGroupName
+  ? volumeIndexData.find((item) => item.produce === selectedGroupName)
+  : null
+
+const selectedPriceRow = selectedGroupName
+  ? priceIndexData.find((item) => item.produce === selectedGroupName)
+  : null
+
+const selectedValueRow = selectedGroupName
+  ? valueOfSupplies.find((item) => item.produce === selectedGroupName)
+  : null
+
+const selectedSellersRow = selectedGroupName
+  ? sellersData.find((item) => item.produce === selectedGroupName)
+  : null
+
+const currentVolumeIndex =
+  selectedVolumeRow?.jun2026 ?? marketSurveyData.summary.volumeIndex
+
+const currentVolumeChange =
+  selectedVolumeRow?.quarterChange ?? marketSurveyData.summary.volumeChange
+
+const currentPriceIndex =
+  selectedPriceRow?.jun2026 ?? marketSurveyData.summary.priceIndex
+
+const currentPriceChange =
+  selectedPriceRow?.quarterChange ?? marketSurveyData.summary.priceChange
+const currentTotalValue =
+  selectedValueRow?.jun2026 ?? marketSurveyData.summary.totalValue
+
+const currentTotalValueChange =
+  selectedValueRow?.quarterChange ?? marketSurveyData.summary.totalValueChange
+const currentSellers =
+  selectedSellersRow?.jun2026 ?? marketSurveyData.summary.sellers
+  const currentSellersChange =
+  selectedSellersRow?.quarterChange ?? marketSurveyData.summary.sellersChange
     const [activeTable, setActiveTable] =
   useState<
     'quantity' | 'price' | 'value' | 'volume' | 'priceIndex' | 'sellers'
@@ -52,13 +149,186 @@ function App() {
           : activeTable === 'sellers'
             ? sellersData
             : quantitySupplied
+    const filteredTableData = (() => {
+  if (!selectedGroupName) {
+    return activeTableData
+  }
+
+  const startIndex = activeTableData.findIndex(
+    (item) => item.produce === selectedGroupName
+  )
+
+  if (startIndex === -1) {
+    return activeTableData
+  }
+
+  const nextGroupIndex = activeTableData.findIndex(
+    (item, index) => index > startIndex && item.group
+  )
+
+  return nextGroupIndex === -1
+    ? activeTableData.slice(startIndex)
+    : activeTableData.slice(startIndex, nextGroupIndex)
+})()
+
+const selectedValueRows = (() => {
+  if (!selectedGroupName) {
+    return valueOfSupplies
+  }
+
+  const startIndex = valueOfSupplies.findIndex(
+    (item) => item.produce === selectedGroupName
+  )
+
+  if (startIndex === -1) {
+    return valueOfSupplies
+  }
+
+  const nextGroupIndex = valueOfSupplies.findIndex(
+    (item, index) => index > startIndex && item.group
+  )
+
+  return nextGroupIndex === -1
+    ? valueOfSupplies.slice(startIndex)
+    : valueOfSupplies.slice(startIndex, nextGroupIndex)
+})()
+
+const sellerProductColors: Record<string, string> = {
+  'Staple Produce': '#176b78',
+  'STAPLE PRODUCE': '#176b78',
+  Fruits: '#9a7424',
+  FRUITS: '#9a7424',
+  Vegetables: '#287860',
+  'VEGETABLE PRODUCE': '#287860',
+
+  'Island Cabbage': '#087f78',
+  'Chinese Cabbage': '#15937d',
+  Cucumber: '#167d93',
+  Tomato: '#b94a3f',
+  Pumpkin: '#b77722',
+  Lettuce: '#367a63',
+  Carrot: '#c26828',
+  'Bowl Cabbage (white)': '#466f89',
+  'Bowl Cabbage (purple)': '#665486',
+
+    // Fruits
+  'Banana, Ripe': '#B68418',   // deep banana gold
+  'Pawpaw': '#C15A2E',         // dark pawpaw orange
+  'Water Melon': '#8E3B55',    // muted watermelon red
+  'Green coconut': '#36765B',  // deep coconut green
+    // Staple Produce
+  'Fiji Taro': '#5B4A7A',             // deep taro purple
+  'Island Taro': '#4A3F6B',           // darker taro violet
+  'Manioc': '#8A6634',                // earthy cassava brown
+  'Sweet Potato (Kumala)': '#9A4F3B', // deep reddish-orange
+  'Yam': '#6C5635',                   // dark earthy brown
+  'Banana - green': '#4E742F',        // deep banana green
+  'Dried coconut': '#7B5B42',         // coconut brown
+}
+
+const valueChartData = !selectedGroupName
+  ? valueOfSupplies
+      .filter((item) => item.group && item.produce)
+      .map((item) => ({
+        name:
+          item.produce === 'STAPLE PRODUCE'
+            ? 'Staple Produce'
+            : item.produce === 'FRUITS'
+              ? 'Fruits'
+              : 'Vegetables',
+        y: item.jun2026,
+        color: sellerProductColors[item.produce] ?? '#27899a',
+      }))
+  : selectedValueRows
+      .filter((item) => item.produce && !item.group)
+      .map((item) => ({
+        name: item.produce,
+        y: item.jun2026,
+        color: sellerProductColors[item.produce] ?? '#27899a',
+      }))
+
+const filteredTrendData = selectedGroupName
+  ? [
+      {
+        period: 'Jun 2025',
+        volumeIndex: selectedVolumeRow?.jun2025 ?? 0,
+        priceIndex: selectedPriceRow?.jun2025 ?? 0,
+      },
+      {
+        period: 'Sep 2025',
+        volumeIndex: selectedVolumeRow?.sep2025 ?? 0,
+        priceIndex: selectedPriceRow?.sep2025 ?? 0,
+      },
+      {
+        period: 'Dec 2025',
+        volumeIndex: selectedVolumeRow?.dec2025 ?? 0,
+        priceIndex: selectedPriceRow?.dec2025 ?? 0,
+      },
+      {
+        period: 'Mar 2026',
+        volumeIndex: selectedVolumeRow?.mar2026 ?? 0,
+        priceIndex: selectedPriceRow?.mar2026 ?? 0,
+      },
+      {
+        period: 'Jun 2026',
+        volumeIndex: selectedVolumeRow?.jun2026 ?? 0,
+        priceIndex: selectedPriceRow?.jun2026 ?? 0,
+      },
+    ]
+  : marketSurveyData.trend
+
+const selectedSellerRows = (() => {
+  if (!selectedGroupName) {
+    return sellersData
+  }
+
+  const startIndex = sellersData.findIndex(
+    (item) => item.produce === selectedGroupName
+  )
+
+  if (startIndex === -1) {
+    return sellersData
+  }
+
+  const nextGroupIndex = sellersData.findIndex(
+    (item, index) => index > startIndex && item.group
+  )
+
+  return nextGroupIndex === -1
+    ? sellersData.slice(startIndex)
+    : sellersData.slice(startIndex, nextGroupIndex)
+})()
+
+const sellerChartData = !selectedGroupName
+  ? sellersData
+      .filter((item) => item.group && item.produce)
+      .map((item) => ({
+        name:
+          item.produce === 'STAPLE PRODUCE'
+            ? 'Staple Produce'
+            : item.produce === 'FRUITS'
+              ? 'Fruits'
+              : 'Vegetables',
+        y: item.jun2026,
+      }))
+  : selectedSellerRows
+      .filter((item) => item.produce && !item.group)
+      .map((item) => ({
+        name: item.produce,
+        y: item.jun2026,
+      }))
+
+const sortedSellerChartData = [...sellerChartData].sort(
+  (a, b) => b.y - a.y
+)
     const trendOptions: Highcharts.Options = {
     
     chart: {
-      backgroundColor: 'transparent',
-      height: 315,
-      spacingTop: 20,
-    },
+  backgroundColor: 'transparent',
+  height: 315,
+  spacingTop: 20,
+  inverted: false,
+},
 
     title: {
       text: undefined,
@@ -69,7 +339,7 @@ function App() {
     },
 
     xAxis: {
-      categories: marketSurveyData.trend.map((item) => item.period),
+      categories: filteredTrendData.map((item) => item.period),
       lineColor: '#b9cbd4',
       tickColor: '#b9cbd4',
       labels: {
@@ -142,14 +412,14 @@ function App() {
         type: 'column',
         name: 'Volume Index',
         color: '#2f8ed6',
-        data: marketSurveyData.trend.map((item) => item.volumeIndex),
+        data: filteredTrendData.map((item) => item.volumeIndex),
       },
       {
         type: 'spline',
         name: 'Price Index',
         color: '#efa51f',
         yAxis: 1,
-        data: marketSurveyData.trend.map((item) => item.priceIndex),
+        data: filteredTrendData.map((item) => item.priceIndex),
       },
     ],
   }
@@ -199,18 +469,16 @@ function App() {
       {
         type: 'pie',
         name: 'Value of supplies',
-        data: marketSurveyData.commodityGroups.map((item) => ({
-          name: item.name,
-          y: item.value,
-        })),
+        data: valueChartData,
       },
     ],
   }
+  
   const sellerOptions: Highcharts.Options = {
   chart: {
     type: 'bar',
     backgroundColor: 'transparent',
-    height: 260,
+    height: Math.max(260, sortedSellerChartData.length * 34 + 80),
   },
 
   title: {
@@ -222,7 +490,7 @@ function App() {
   },
 
   xAxis: {
-    categories: marketSurveyData.commodityGroups.map((item) => item.name),
+    categories: sortedSellerChartData.map((item) => item.name),
     lineWidth: 0,
     tickWidth: 0,
     labels: {
@@ -268,11 +536,89 @@ function App() {
     {
       type: 'bar',
       name: 'Sellers',
-      data: marketSurveyData.commodityGroups.map((item) => item.sellers),
-      color: '#27899a',
+      data: sortedSellerChartData.map((item) => ({
+  y: item.y,
+  color: sellerProductColors[item.name] ?? '#27899a',
+})),
+      
     },
   ],
 }
+const overviewValueOptions: Highcharts.Options = {
+  chart: {
+    type: 'bar',
+    backgroundColor: 'transparent',
+    height: 230,
+  },
+
+  title: {
+    text: undefined,
+  },
+
+  credits: {
+    enabled: false,
+  },
+
+  xAxis: {
+    categories: overviewGroupData.map((group) => group.name),
+    lineWidth: 0,
+    tickWidth: 0,
+  },
+
+  yAxis: {
+  min: 0,
+  title: {
+    text: 'Value of supplies (VT)',
+  },
+  gridLineColor: '#e4edf1',
+
+  labels: {
+    formatter: function () {
+      return Number(this.value).toLocaleString()
+    },
+  },
+},
+
+  legend: {
+    enabled: false,
+  },
+
+  tooltip: {
+    pointFormat: '<b>VT {point.y:,.0f}</b>',
+  },
+
+  plotOptions: {
+    bar: {
+      borderRadius: 6,
+      pointWidth: 32,
+      dataLabels: {
+        enabled: true,
+        format: 'VT {point.y:,.0f}',
+        style: {
+          fontWeight: '700',
+          textOutline: 'none',
+        },
+      },
+    },
+  },
+
+  series: [
+    {
+      type: 'bar',
+      name: 'Value of supplies',
+      data: overviewGroupData.map((group) => ({
+        y: group.value * 1000,
+        color: sellerProductColors[group.name] ?? '#27899a',
+      })),
+    },
+  ],
+}
+const produceValueChartData = (
+  selectedGroupName
+    ? selectedValueRows.filter((item) => item.produce && !item.group)
+    : valueOfSupplies.filter((item) => item.produce && !item.group)
+).sort((a, b) => b.jun2026 - a.jun2026)
+
 const produceValueOptions: Highcharts.Options = {
   chart: {
     type: 'bar',
@@ -289,10 +635,7 @@ const produceValueOptions: Highcharts.Options = {
   },
 
   xAxis: {
-    categories: valueOfSupplies
-      .filter((item) => item.produce && !item.group)
-      .sort((a, b) => b.jun2026 - a.jun2026)
-      .map((item) => item.produce),
+    categories: produceValueChartData.map((item) => item.produce),
 
     lineWidth: 0,
     tickWidth: 0,
@@ -344,17 +687,15 @@ const produceValueOptions: Highcharts.Options = {
       type: 'bar',
       name: 'Share of value',
 
-      data: valueOfSupplies
-        .filter((item) => item.produce && !item.group)
-        .sort((a, b) => b.jun2026 - a.jun2026)
-        .map((item) => ({
-          y: (item.jun2026 / 1169) * 100,
-          custom: {
-            value: item.jun2026,
-          },
-        })),
+      data: produceValueChartData.map((item) => ({
+  y: (item.jun2026 / currentTotalValue) * 100,
+  color: sellerProductColors[item.produce] ?? '#27899a',
+  custom: {
+    value: item.jun2026,
+  },
+})),
 
-      color: '#27899a',
+     
     },
   ],
 }
@@ -363,7 +704,9 @@ const produceValueOptions: Highcharts.Options = {
       {/* HEADER */}
       <header className="hero">
         <div className="hero-brand">
-          <div className="brand-logo">VBoS</div>
+         <div className="brand-logo">
+  <img src={vbosLogo} alt="Vanuatu Bureau of Statistics" />
+</div>
 
           <div>
             <span className="eyebrow">VANUATU BUREAU OF STATISTICS</span>
@@ -393,19 +736,22 @@ const produceValueOptions: Highcharts.Options = {
 
       <div className="dashboard-layout">
         {/* SIDEBAR */}
-        <aside className="sidebar">
+        <aside className={`sidebar ${mobileMenuOpen ? 'mobile-open' : ''}`}>
           <div className="sidebar-title">MARKET SURVEY</div>
 
-          <nav>
-            <a className="nav-item active" href="#overview">
-              <Home size={18} />
-              Overview
-            </a>
-
-            <a className="nav-item" href="#market-movement">
-              <BarChart3 size={18} />
-              Market Movement
-            </a>
+          <nav onClick={() => setMobileMenuOpen(false)}>
+            <a
+  className={`nav-item ${activePage === 'overview' ? 'active' : ''}`}
+  href="#overview"
+  onClick={(e) => {
+  e.preventDefault()
+  setActivePage('overview')
+  setSelectedCommodity('all')
+}}
+>
+  <Home size={18} />
+  Overview
+</a>
 
             <div className="nav-group">
               <div className="nav-item">
@@ -414,53 +760,98 @@ const produceValueOptions: Highcharts.Options = {
                 <ChevronDown size={15} className="nav-arrow" />
               </div>
 
-              <a className="nav-subitem" href="#staple">
-                <Wheat size={15} />
-                Staple Produce
-              </a>
+              <a
+  className={`nav-subitem ${activePage === 'staple' ? 'active' : ''}`}
+  href="#staple"
+  onClick={(e) => {
+    e.preventDefault()
+    setActivePage('staple')
+    setSelectedCommodity('staple')
+  }}
+>
+  <Wheat size={15} />
+  Staple Produce
+</a>
 
-              <a className="nav-subitem" href="#fruits">
-                <ShoppingBasket size={15} />
-                Fruits
-              </a>
+              <a
+  className={`nav-subitem ${activePage === 'fruits' ? 'active' : ''}`}
+  href="#fruits"
+  onClick={(e) => {
+    e.preventDefault()
+    setActivePage('fruits')
+    setSelectedCommodity('fruits')
+  }}
+>
+  <ShoppingBasket size={15} />
+  Fruits
+</a>
 
-              <a className="nav-subitem" href="#vegetables">
-                <Store size={15} />
-                Vegetables
-              </a>
-            </div>
+              <a
+  className={`nav-subitem ${activePage === 'vegetables' ? 'active' : ''}`}
+  href="#vegetables"
+  onClick={(e) => {
+    e.preventDefault()
+    setActivePage('vegetables')
+    setSelectedCommodity('vegetables')
+  }}
+>
+  <Store size={15} />
+  Vegetables
+  </a>
+</div>
 
-            <a className="nav-item" href="#sellers">
-              <Users size={18} />
-              Sellers
-            </a>
+   <a
+  className={`nav-item ${activePage === 'value' ? 'active' : ''}`}
+  href="#value-of-supplies"
+  onClick={(e) => {
+    e.preventDefault()
+    setActivePage('value')
+  }}
+>
+  <Tags size={18} />
+  Value of Supplies
+</a>
 
-            <a className="nav-item" href="#value">
-              <Tags size={18} />
-              Value of Supplies
-            </a>
+            <a
+  className={`nav-item ${activePage === 'tables' ? 'active' : ''}`}
+  href="#detailed-tables"
+  onClick={(e) => {
+    e.preventDefault()
+    setActivePage('tables')
+  }}
+>
+  <Table2 size={18} />
+  Detailed Tables
+</a>
 
-            <a className="nav-item" href="#tables">
-              <Table2 size={18} />
-              Detailed Tables
-            </a>
-
-            <a className="nav-item" href="#downloads">
-              <Download size={18} />
-              Downloads
-            </a>
-
-            <a className="nav-item" href="#methodology">
-              <Info size={18} />
-              About & Methodology
-            </a>
+            
+            <a
+  className={`nav-item ${activePage === 'methodology' ? 'active' : ''}`}
+  href="#methodology"
+  onClick={(e) => {
+    e.preventDefault()
+    setActivePage('methodology')
+  }}
+>
+  <Info size={18} />
+  About & Methodology
+</a>
           </nav>
         </aside>
 
         {/* MAIN CONTENT */}
-        <main className="dashboard-main" id="overview">
-          {/* TOOLBAR */}
+        <main className="dashboard-main">
+
+ {/* TOOLBAR */}
           <section className="toolbar">
+            <button
+  type="button"
+  className="mobile-menu-button"
+  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+  aria-label="Open navigation menu"
+>
+  {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+</button>
             <div className="filter-control">
               <label>Quarter</label>
               <select defaultValue="June">
@@ -477,12 +868,19 @@ const produceValueOptions: Highcharts.Options = {
 
             <div className="filter-control commodity-filter">
               <label>Commodity Group</label>
-              <select defaultValue="all">
-                <option value="all">All Commodities</option>
-                <option value="staple">Staple Produce</option>
-                <option value="fruits">Fruits</option>
-                <option value="vegetables">Vegetables</option>
-              </select>
+              <select
+                  value={selectedCommodity}
+                  onChange={(e) =>
+                    setSelectedCommodity(
+                    e.target.value as 'all' | 'staple' | 'fruits' | 'vegetables'
+                  )
+                } 
+              >
+               <option value="all">All Commodities</option>
+               <option value="staple">Staple Produce</option>
+               <option value="fruits">Fruits</option>
+               <option value="vegetables">Vegetables</option>
+             </select>
             </div>
   <div className="toolbar-actions">
   <button
@@ -539,17 +937,25 @@ const produceValueOptions: Highcharts.Options = {
 </button>
             </div>
           </section>
-
-          {/* KPI CARDS */}
+{activePage === 'overview' && (
+  <>
+{/* KPI CARDS */}
           <section className="kpi-grid">
             <article className="kpi-card volume">
               <div className="kpi-icon">
                 <BarChart3 size={24} />
               </div>
               <div>
-                <span>Overall Volume Index</span>
-                <strong>86</strong>
-                <small className="positive">▲ +17% vs previous quarter</small>
+                <span>
+  {selectedCommodityLabel
+    ? `${selectedCommodityLabel} Volume Index`
+    : 'Overall Volume Index'}
+</span>
+                <strong>{currentVolumeIndex}</strong>
+                <small className={currentVolumeChange >= 0 ? 'positive' : 'negative'}>
+                    {currentVolumeChange >= 0 ? '▲' : '▼'} {currentVolumeChange > 0 ? '+' : ''}
+                    {currentVolumeChange}% vs previous quarter
+                </small>
               </div>
             </article>
 
@@ -558,9 +964,17 @@ const produceValueOptions: Highcharts.Options = {
                 <Tags size={24} />
               </div>
               <div>
-                <span>Overall Price Index</span>
-                <strong>174</strong>
-                <small className="negative">▼ -7% vs previous quarter</small>
+                <span>
+  {selectedCommodityLabel
+    ? `${selectedCommodityLabel} Price Index`
+    : 'Overall Price Index'}
+</span>
+                  <strong>{currentPriceIndex}</strong>
+
+                  <small className={currentPriceChange >= 0 ? 'positive' : 'negative'}>
+                       {currentPriceChange >= 0 ? '▲' : '▼'} {currentPriceChange > 0 ? '+' : ''}
+                        {currentPriceChange}% vs previous quarter
+                     </small>
               </div>
             </article>
 
@@ -569,9 +983,21 @@ const produceValueOptions: Highcharts.Options = {
                 <Boxes size={24} />
               </div>
               <div>
-                <span>Total Value of Supplies</span>
-                <strong>VT1.169 million</strong>
-                <small className="positive">▲ +30% vs previous quarter</small>
+                <span>
+  {selectedCommodityLabel
+    ? `${selectedCommodityLabel} Value of Supplies`
+    : 'Total Value of Supplies'}
+</span>
+
+<strong>
+  VT {Math.round(currentTotalValue * 1000).toLocaleString()}
+</strong>
+
+                       <small className={currentTotalValueChange >= 0 ? 'positive' : 'negative'}>
+                       {currentTotalValueChange >= 0 ? '▲' : '▼'}{' '}
+                       {currentTotalValueChange > 0 ? '+' : ''}
+                       {currentTotalValueChange}% vs previous quarter
+                     </small>
               </div>
             </article>
 
@@ -580,157 +1006,302 @@ const produceValueOptions: Highcharts.Options = {
                 <Users size={24} />
               </div>
               <div>
-                <span>Average Number of Sellers</span>
-                <strong>154</strong>
-                <small className="negative">▼ -16% vs previous quarter</small>
+                <span>
+  {selectedCommodityLabel
+    ? `${selectedCommodityLabel} Sellers`
+    : 'Average Number of Sellers'}
+</span>
+
+                  <strong>{currentSellers}</strong>
+
+                    <small className={currentSellersChange >= 0 ? 'positive' : 'negative'}>
+                    {currentSellersChange >= 0 ? '▲' : '▼'}{' '}
+                    {currentSellersChange > 0 ? '+' : ''}
+                    {currentSellersChange}% vs previous quarter
+                   </small>
               </div>
             </article>
-          </section>
+            </section>
 
-          {/* FIRST CHART ROW */}
-          <section className="panel-grid">
-            <article className="panel">
+ <section className="overview-summary-grid">
+  <article className="panel overview-snapshot">
+    <div className="panel-heading">
+      <div>
+        <h2>Commodity Group Snapshot</h2>
+        <p>June Quarter 2026</p>
+      </div>
+      <Layers3 size={22} />
+    </div>
+
+    <div className="overview-group-cards">
+      {overviewGroupData.map((group) => (
+        <div className="overview-group-card" key={group.name}>
+          <h3>{group.name}</h3>
+
+          <div className="overview-metric">
+            <span>Volume Index</span>
+            <strong>{group.volume}</strong>
+          </div>
+
+          <div className="overview-metric">
+            <span>Price Index</span>
+            <strong>{group.price}</strong>
+          </div>
+
+          <div className="overview-metric">
+            <span>Value</span>
+            <strong>VT {Math.round(group.value * 1000).toLocaleString()}</strong>
+          </div>
+
+          <div className="overview-metric">
+            <span>Sellers</span>
+            <strong>{group.sellers}</strong>
+          </div>
+        </div>
+      ))}
+    </div>
+  </article>
+  <article className="panel overview-highlights">
+  <div className="panel-heading">
+    <div>
+      <h2>June Quarter Highlights</h2>
+      <p>Key market movements</p>
+    </div>
+    <BarChart3 size={22} />
+  </div>
+
+  <div className="highlight-list">
+    <div className="highlight-item">
+      <span>Overall market volume</span>
+      <strong className="positive">▲ +17%</strong>
+    </div>
+
+    <div className="highlight-item">
+      <span>Overall price index</span>
+      <strong className="negative">▼ -7%</strong>
+    </div>
+
+    <div className="highlight-item">
+      <span>Total value of supplies</span>
+      <strong className="positive">▲ +30%</strong>
+    </div>
+
+    <div className="highlight-item">
+      <span>Average number of sellers</span>
+      <strong className="negative">▼ -16%</strong>
+    </div>
+
+    <div className="highlight-feature">
+      <span>Largest value contributor</span>
+      <strong>Staple Produce</strong>
+      <small>VT 802,000</small>
+    </div>
+  </div>
+</article>
+</section>
+<section className="panel overview-comparison">
+  <div className="panel-heading">
+    <div>
+      <h2>Quick Market Comparison</h2>
+      <p>Value of supplies by commodity group, June Quarter 2026</p>
+    </div>
+    <BarChart3 size={22} />
+  </div>
+
+  <div className="chart-box">
+    <HighchartsReact
+      highcharts={Highcharts}
+      options={overviewValueOptions}
+    />
+  </div>
+</section>
+</>
+)}
+
+{/* SECOND ROW */}
+          <section className="panel-grid commodity-page-grid">
+            <article
+  className="panel"
+  style={{
+    display:
+      activePage === 'staple' ||
+      activePage === 'fruits' ||
+      activePage === 'vegetables'
+        ? undefined
+        : 'none',
+  }}
+>
               <div className="panel-heading">
                 <div>
-                  <h2>Value of Supplies by Commodity Group</h2>
-                  <p>Share of total value, June Quarter 2026</p>
-                </div>
-                <PackageSearch size={22} />
-              </div>
+                  <h2>
+                  {selectedCommodityLabel ?? 'Commodity Group'}
+                  </h2>
 
-              <div className="chart-box">
-  <HighchartsReact
-    highcharts={Highcharts}
-    options={valueShareOptions}
-  />
-</div>
-            </article>
-
-            <article className="panel wide-panel" id="market-movement">
-              <div className="panel-heading">
-                <div>
-                  <h2>Quarterly Volume and Price Indices</h2>
-                  <p>All commodities, June 2025 – June 2026</p>
-                </div>
-                <BarChart3 size={22} />
-              </div>
-
-              <div className="chart-box">
-  <HighchartsReact
-    highcharts={Highcharts}
-    options={trendOptions}
-  />
-</div>
-            </article>
-          </section>
-
-          {/* SECOND ROW */}
-          <section className="panel-grid">
-            <article className="panel">
-              <div className="panel-heading">
-                <div>
-                  <h2>Commodity Group Performance</h2>
-                  <p>Change from previous quarter</p>
+                  <p>
+                  June Quarter 2026 · Commodity Group Performance
+                  </p>
                 </div>
                 <Layers3 size={22} />
               </div>
 
-              <div className="commodity-cards">
-  {marketSurveyData.commodityGroups.map((item) => {
-    const sectionId =
-      item.name === 'Staple Produce'
-        ? 'staple'
-        : item.name === 'Fruits'
-          ? 'fruits'
-          : 'vegetables'
+   <div className="kpi-grid commodity-detail-kpis">
 
-    const Icon =
-      item.name === 'Staple Produce'
-        ? Wheat
-        : item.name === 'Fruits'
-          ? ShoppingBasket
-          : Store
+  <div className="kpi-card volume">
+    <div className="kpi-icon">
+      <BarChart3 size={24} />
+    </div>
 
-    return (
-      <div
-        key={item.name}
-        id={sectionId}
-        className={`commodity-card ${sectionId}`}
-      >
-        <div className="commodity-card-header">
-          <div className="commodity-icon">
-            <Icon size={25} />
-          </div>
+    <div>
+      <span>Volume Index</span>
+      <strong>{currentVolumeIndex}</strong>
 
-          <strong>{item.name}</strong>
+      <small className={currentVolumeChange >= 0 ? 'positive' : 'negative'}>
+        {currentVolumeChange >= 0 ? '▲' : '▼'}{' '}
+        {currentVolumeChange > 0 ? '+' : ''}
+        {currentVolumeChange}% vs previous quarter
+      </small>
+    </div>
+  </div>
+
+  <div className="kpi-card price">
+    <div className="kpi-icon">
+      <Tags size={24} />
+    </div>
+
+    <div>
+      <span>Price Index</span>
+      <strong>{currentPriceIndex}</strong>
+
+      <small className={currentPriceChange >= 0 ? 'positive' : 'negative'}>
+        {currentPriceChange >= 0 ? '▲' : '▼'}{' '}
+        {currentPriceChange > 0 ? '+' : ''}
+        {currentPriceChange}% vs previous quarter
+      </small>
+    </div>
+  </div>
+
+  <div className="kpi-card value">
+    <div className="kpi-icon">
+      <Boxes size={24} />
+    </div>
+
+    <div>
+      <span>Value of Supplies</span>
+      <strong>
+        VT {Math.round(currentTotalValue * 1000).toLocaleString()}
+      </strong>
+
+      <small className={currentTotalValueChange >= 0 ? 'positive' : 'negative'}>
+        {currentTotalValueChange >= 0 ? '▲' : '▼'}{' '}
+        {currentTotalValueChange > 0 ? '+' : ''}
+        {currentTotalValueChange}% vs previous quarter
+      </small>
+    </div>
+  </div>
+
+  <div className="kpi-card sellers">
+    <div className="kpi-icon">
+      <Users size={24} />
+    </div>
+
+    <div>
+      <span>Average Sellers</span>
+      <strong>{currentSellers}</strong>
+
+      <small className={currentSellersChange >= 0 ? 'positive' : 'negative'}>
+        {currentSellersChange >= 0 ? '▲' : '▼'}{' '}
+        {currentSellersChange > 0 ? '+' : ''}
+        {currentSellersChange}% vs previous quarter
+      </small>
+    </div>
+  </div>
+
+</div>
+            </article>
+
+</section>
+{(activePage === 'staple' ||
+  activePage === 'fruits' ||
+  activePage === 'vegetables') && (
+  <section className="panel-grid commodity-detail-charts">
+    <article className="panel">
+      <div className="panel-heading">
+        <div>
+          <h2>Value by Individual Produce</h2>
+          <p>{selectedCommodityLabel} · June Quarter 2026</p>
         </div>
-
-        <div className="commodity-stat">
-          <span>Volume Index</span>
-
-          <strong>{item.volumeIndex}</strong>
-
-          <small
-            className={
-              item.volumeChange >= 0
-                ? 'change-badge positive'
-                : 'change-badge negative'
-            }
-          >
-            {item.volumeChange >= 0 ? '▲' : '▼'}{' '}
-            {item.volumeChange >= 0 ? '+' : ''}
-            {item.volumeChange}%
-          </small>
-        </div>
-
-        <div className="commodity-stat">
-          <span>Price Index</span>
-
-          <strong>{item.priceIndex}</strong>
-
-          <small
-            className={
-              item.priceChange >= 0
-                ? 'change-badge positive'
-                : 'change-badge negative'
-            }
-          >
-            {item.priceChange >= 0 ? '▲' : '▼'}{' '}
-            {item.priceChange >= 0 ? '+' : ''}
-            {item.priceChange}%
-          </small>
-        </div>
+        <PackageSearch size={22} />
       </div>
-    )
-  })}
-</div>
-            </article>
 
-            <article className="panel" id="sellers">
-              <div className="panel-heading">
-                <div>
-                  <h2>Sellers by Commodity Group</h2>
-                  <p>June Quarter 2026</p>
-                </div>
-                <Users size={22} />
-              </div>
+      <div className="chart-box">
+        <HighchartsReact
+          highcharts={Highcharts}
+          options={valueShareOptions}
+        />
+      </div>
+    </article>
 
-              <div className="chart-box">
-  <HighchartsReact
-    highcharts={Highcharts}
-    options={sellerOptions}
-  />
-</div>
-            </article>
-          </section>
+    <article className="panel">
+      <div className="panel-heading">
+        <div>
+          <h2>Sellers by Individual Produce</h2>
+          <p>{selectedCommodityLabel} · June Quarter 2026</p>
+        </div>
+        <Users size={22} />
+      </div>
 
+      <div className="chart-box">
+        <HighchartsReact
+          highcharts={Highcharts}
+          options={sellerOptions}
+        />
+      </div>
+    </article>
+  </section>
+)}
+{(activePage === 'staple' ||
+  activePage === 'fruits' ||
+  activePage === 'vegetables') && (
+  <section className="panel commodity-trend-panel">
+    <div className="panel-heading">
+      <div>
+        <h2>Quarterly Volume and Price Trend</h2>
+        <p>{selectedCommodityLabel} · June 2025 – June 2026</p>
+      </div>
+
+      <BarChart3 size={22} />
+    </div>
+
+    <div className="chart-box">
+      <HighchartsReact
+        highcharts={Highcharts}
+        options={trendOptions}
+      />
+    </div>
+  </section>
+)}
           {/* TABLE AREA */}
-          <section className="panel" id="value">
+          <section
+  className="panel"
+  id="value"
+  style={{
+    display: activePage === 'value' ? undefined : 'none',
+  }}
+>
   <div className="panel-heading">
     <div>
       <span className="section-kicker">VALUE OF SUPPLIES</span>
-      <h2>Share of Value by Produce</h2>
-      <p>June Quarter 2026 — percentage of total market value</p>
+      <h2>
+  {selectedCommodity === 'all'
+    ? 'Share of Value by Produce'
+    : `Share of Value – ${selectedCommodityLabel}`}
+</h2>
+
+<p>
+  {selectedCommodity === 'all'
+    ? 'June Quarter 2026 — percentage of total market value'
+    : `June Quarter 2026 — percentage of ${selectedCommodityLabel} value`}
+</p>
     </div>
 
     <Tags size={22} />
@@ -743,11 +1314,24 @@ const produceValueOptions: Highcharts.Options = {
     />
   </div>
 </section>
-          <section className="panel data-panel" id="tables">
+          <section
+  className="panel"
+  id="tables"
+  style={{
+    display: activePage === 'tables' ? undefined : 'none',
+  }}
+>
             <div className="panel-heading">
               <div>
-                <h2>Detailed Data Tables</h2>
-                <p>Quarterly data by commodity and commodity group</p>
+                <h2>
+  {selectedCommodity === 'all'
+    ? 'Detailed Market Survey Tables'
+    : `Detailed Tables – ${selectedCommodityLabel}`}
+</h2>
+
+<p>
+  June 2025 – June 2026 · Quarterly data by produce and commodity group
+</p>
               </div>
               <Table2 size={22} />
             </div>
@@ -808,7 +1392,7 @@ const produceValueOptions: Highcharts.Options = {
     </thead>
 
     <tbody>
-      {activeTableData.map((item) => (
+      {filteredTableData.map((item) => (
         <tr
           key={item.produce}
           className={item.group ? 'group-row' : ''}
@@ -851,7 +1435,13 @@ const produceValueOptions: Highcharts.Options = {
   </table>
 </div>
           </section>
-          <section className="methodology-panel" id="methodology">
+          <section
+  className="methodology-panel"
+  id="methodology"
+  style={{
+    display: activePage === 'methodology' ? undefined : 'none',
+  }}
+>
   <div className="panel-heading">
     <div>
       <span className="section-kicker">ABOUT THE SURVEY</span>
@@ -863,7 +1453,27 @@ const produceValueOptions: Highcharts.Options = {
 
     <Info size={22} />
   </div>
+<div className="methodology-glance">
+  <div className="glance-item">
+    <span>Collection</span>
+    <strong>Fortnightly</strong>
+  </div>
 
+  <div className="glance-item">
+    <span>Reporting</span>
+    <strong>Quarterly</strong>
+  </div>
+
+  <div className="glance-item">
+    <span>Index Weights</span>
+    <strong>2016</strong>
+  </div>
+
+  <div className="glance-item">
+    <span>Market Coverage</span>
+    <strong>Port Vila Central Market</strong>
+  </div>
+</div>
   <div className="methodology-grid">
     <div className="methodology-card">
       <strong>Survey Purpose</strong>
@@ -896,14 +1506,15 @@ const produceValueOptions: Highcharts.Options = {
       </p>
     </div>
   </div>
+</section>
 
-  <div className="methodology-note">
+<div className="methodology-note">
     <strong>Vanuatu Bureau of Statistics</strong>
     <span>
       Official Statistics · Port Vila Central Market Survey
     </span>
   </div>
-</section>
+
         </main>
       </div>
     </div>
