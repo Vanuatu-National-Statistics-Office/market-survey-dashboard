@@ -805,7 +805,7 @@ const produceValueOptions: Highcharts.Options = {
   ],
 }
   return (
-    <div className="app-shell">
+    <div className={isAndroidApp ? 'app-shell android-app' : 'app-shell'}>
       {/* HEADER */}
       <header className="hero">
         <div className="hero-brand">
@@ -1731,6 +1731,52 @@ const produceValueOptions: Highcharts.Options = {
 
         </main>
       </div>
+      {/* ANDROID BOTTOM NAVIGATION */}
+{isAndroidApp && (
+  <nav className="android-bottom-nav">
+
+    <button
+      type="button"
+      className={activePage === 'overview' ? 'active' : ''}
+      onClick={() => setActivePage('overview')}
+    >
+      <Home size={22} />
+      <span>Overview</span>
+    </button>
+
+    <button
+      type="button"
+      className={
+        ['staple', 'fruits', 'vegetables'].includes(activePage)
+          ? 'active'
+          : ''
+      }
+      onClick={() => setActivePage('staple')}
+    >
+      <Layers3 size={22} />
+      <span>Commodities</span>
+    </button>
+
+    <button
+      type="button"
+      className={activePage === 'tables' ? 'active' : ''}
+      onClick={() => setActivePage('tables')}
+    >
+      <Table2 size={22} />
+      <span>Tables</span>
+    </button>
+
+    <button
+      type="button"
+      className={activePage === 'methodology' ? 'active' : ''}
+      onClick={() => setActivePage('methodology')}
+    >
+      <Info size={22} />
+      <span>About</span>
+    </button>
+
+  </nav>
+)}
     </div>
   )
 }

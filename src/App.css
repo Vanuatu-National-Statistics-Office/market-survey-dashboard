@@ -182,3 +182,49 @@
     border-right-color: var(--border);
   }
 }
+/* =========================================
+   ANDROID APP — MODERN MOBILE DESIGN
+   ========================================= */
+   /* Android KPI cards - 2 column layout */
+
+.android-app .kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.android-app .kpi-card {
+  min-width: 0;
+  padding: 14px;
+  border-radius: 18px;
+}
+
+.android-app .kpi-card strong {
+  font-size: clamp(1.2rem, 5vw, 1.7rem);
+}
+/* Modern Android KPI card colors */
+
+.android-app .kpi-card.volume {
+  background: linear-gradient(135deg, #0875c9, #034b91);
+  color: white;
+}
+
+.android-app .kpi-card.price {
+  background: linear-gradient(135deg, #00a995, #006f78);
+  color: white;
+}
+
+.android-app .kpi-card.value {
+  background: linear-gradient(135deg, #8050db, #49329a);
+  color: white;
+}
+
+.android-app .kpi-card.sellers {
+  background: linear-gradient(135deg, #ffab21, #d66b09);
+  color: white;
+}
+
+.android-app .kpi-card span,
+.android-app .kpi-card strong {
+  color: white;
+}
