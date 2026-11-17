@@ -9,6 +9,10 @@ export const marketSurveyData = {
   "releaseDate": "",
   "periods": [
     {
+      "label": "Mar 2025",
+      "key": "mar2025"
+    },
+    {
       "label": "Jun 2025",
       "key": "jun2025"
     },
@@ -40,6 +44,11 @@ export const marketSurveyData = {
     "sellersChange": -16
   },
   "trend": [
+    {
+      "period": "Mar 2025",
+      "volumeIndex": 26,
+      "priceIndex": 207
+    },
     {
       "period": "Jun 2025",
       "volumeIndex": 72,
@@ -104,6 +113,7 @@ export const quantitySupplied = [
   {
     "produce": "STAPLE PRODUCE",
     "values": [
+      172,
       537,
       486,
       684,
@@ -112,16 +122,26 @@ export const quantitySupplied = [
     ],
     "quarterChange": -9,
     "annualChange": 4,
+    "quarterChangeByPeriod": {
+      "jun2026": -9,
+      "mar2026": -10
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 4,
+      "mar2026": 258
+    },
     "group": true,
     "jun2025": 537,
     "sep2025": 486,
     "dec2025": 684,
     "mar2026": 614,
-    "jun2026": 560
+    "jun2026": 560,
+    "mar2025": 172
   },
   {
     "produce": "Fiji Taro",
     "values": [
+      118,
       253,
       230,
       396,
@@ -130,15 +150,25 @@ export const quantitySupplied = [
     ],
     "quarterChange": 78,
     "annualChange": 25,
+    "quarterChangeByPeriod": {
+      "jun2026": 78,
+      "mar2026": -55
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 25,
+      "mar2026": 50
+    },
     "jun2025": 253,
     "sep2025": 230,
     "dec2025": 396,
     "mar2026": 178,
-    "jun2026": 317
+    "jun2026": 317,
+    "mar2025": 118
   },
   {
     "produce": "Island Taro",
     "values": [
+      120,
       760,
       951,
       657,
@@ -147,15 +177,25 @@ export const quantitySupplied = [
     ],
     "quarterChange": 151,
     "annualChange": 77,
+    "quarterChangeByPeriod": {
+      "jun2026": 151,
+      "mar2026": -19
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 77,
+      "mar2026": 346
+    },
     "jun2025": 760,
     "sep2025": 951,
     "dec2025": 657,
     "mar2026": 534,
-    "jun2026": 1343
+    "jun2026": 1343,
+    "mar2025": 120
   },
   {
     "produce": "Manioc",
     "values": [
+      153,
       605,
       409,
       366,
@@ -164,15 +204,25 @@ export const quantitySupplied = [
     ],
     "quarterChange": 18,
     "annualChange": -42,
+    "quarterChangeByPeriod": {
+      "jun2026": 18,
+      "mar2026": -18
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -42,
+      "mar2026": 96
+    },
     "jun2025": 605,
     "sep2025": 409,
     "dec2025": 366,
     "mar2026": 298,
-    "jun2026": 352
+    "jun2026": 352,
+    "mar2025": 153
   },
   {
     "produce": "Sweet Potato (Kumala)",
     "values": [
+      134,
       215,
       357,
       1444,
@@ -181,15 +231,25 @@ export const quantitySupplied = [
     ],
     "quarterChange": -83,
     "annualChange": -23,
+    "quarterChangeByPeriod": {
+      "jun2026": -83,
+      "mar2026": -31
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -23,
+      "mar2026": 641
+    },
     "jun2025": 215,
     "sep2025": 357,
     "dec2025": 1444,
     "mar2026": 992,
-    "jun2026": 165
+    "jun2026": 165,
+    "mar2025": 134
   },
   {
     "produce": "Yam",
     "values": [
+      60,
       508,
       477,
       303,
@@ -198,15 +258,25 @@ export const quantitySupplied = [
     ],
     "quarterChange": 885,
     "annualChange": 76,
+    "quarterChangeByPeriod": {
+      "jun2026": 885,
+      "mar2026": -70
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 76,
+      "mar2026": 52
+    },
     "jun2025": 508,
     "sep2025": 477,
     "dec2025": 303,
     "mar2026": 91,
-    "jun2026": 896
+    "jun2026": 896,
+    "mar2025": 60
   },
   {
     "produce": "Banana - green",
     "values": [
+      216,
       648,
       398,
       829,
@@ -215,15 +285,25 @@ export const quantitySupplied = [
     ],
     "quarterChange": -56,
     "annualChange": -54,
+    "quarterChangeByPeriod": {
+      "jun2026": -56,
+      "mar2026": -20
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -54,
+      "mar2026": 208
+    },
     "jun2025": 648,
     "sep2025": 398,
     "dec2025": 829,
     "mar2026": 666,
-    "jun2026": 296
+    "jun2026": 296,
+    "mar2025": 216
   },
   {
     "produce": "Dried coconut",
     "values": [
+      401,
       768,
       581,
       793,
@@ -232,15 +312,25 @@ export const quantitySupplied = [
     ],
     "quarterChange": -64,
     "annualChange": -28,
+    "quarterChangeByPeriod": {
+      "jun2026": -64,
+      "mar2026": 94
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -28,
+      "mar2026": 284
+    },
     "jun2025": 768,
     "sep2025": 581,
     "dec2025": 793,
     "mar2026": 1541,
-    "jun2026": 550
+    "jun2026": 550,
+    "mar2025": 401
   },
   {
     "produce": "FRUITS",
     "values": [
+      149,
       221,
       364,
       630,
@@ -249,16 +339,26 @@ export const quantitySupplied = [
     ],
     "quarterChange": -40,
     "annualChange": 5,
+    "quarterChangeByPeriod": {
+      "jun2026": -40,
+      "mar2026": -38
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 5,
+      "mar2026": 161
+    },
     "group": true,
     "jun2025": 221,
     "sep2025": 364,
     "dec2025": 630,
     "mar2026": 387,
-    "jun2026": 233
+    "jun2026": 233,
+    "mar2025": 149
   },
   {
     "produce": "Banana, Ripe",
     "values": [
+      121,
       446,
       709,
       1072,
@@ -267,15 +367,25 @@ export const quantitySupplied = [
     ],
     "quarterChange": -49,
     "annualChange": 2,
+    "quarterChangeByPeriod": {
+      "jun2026": -49,
+      "mar2026": -17
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 2,
+      "mar2026": 631
+    },
     "jun2025": 446,
     "sep2025": 709,
     "dec2025": 1072,
     "mar2026": 885,
-    "jun2026": 455
+    "jun2026": 455,
+    "mar2025": 121
   },
   {
     "produce": "Pawpaw",
     "values": [
+      94,
       383,
       485,
       751,
@@ -284,15 +394,25 @@ export const quantitySupplied = [
     ],
     "quarterChange": -13,
     "annualChange": -26,
+    "quarterChangeByPeriod": {
+      "jun2026": -13,
+      "mar2026": -56
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -26,
+      "mar2026": 250
+    },
     "jun2025": 383,
     "sep2025": 485,
     "dec2025": 751,
     "mar2026": 327,
-    "jun2026": 284
+    "jun2026": 284,
+    "mar2025": 94
   },
   {
     "produce": "Water Melon",
     "values": [
+      315,
       28,
       156,
       577,
@@ -301,15 +421,25 @@ export const quantitySupplied = [
     ],
     "quarterChange": -54,
     "annualChange": 292,
+    "quarterChangeByPeriod": {
+      "jun2026": -54,
+      "mar2026": -58
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 292,
+      "mar2026": -23
+    },
     "jun2025": 28,
     "sep2025": 156,
     "dec2025": 577,
     "mar2026": 243,
-    "jun2026": 111
+    "jun2026": 111,
+    "mar2025": 315
   },
   {
     "produce": "Green coconut",
     "values": [
+      64,
       28,
       106,
       117,
@@ -318,15 +448,25 @@ export const quantitySupplied = [
     ],
     "quarterChange": -15,
     "annualChange": 188,
+    "quarterChangeByPeriod": {
+      "jun2026": -15,
+      "mar2026": -20
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 188,
+      "mar2026": 47
+    },
     "jun2025": 28,
     "sep2025": 106,
     "dec2025": 117,
     "mar2026": 94,
-    "jun2026": 80
+    "jun2026": 80,
+    "mar2025": 64
   },
   {
     "produce": "VEGETABLE PRODUCE",
     "values": [
+      21,
       52,
       130,
       109,
@@ -335,16 +475,26 @@ export const quantitySupplied = [
     ],
     "quarterChange": 56,
     "annualChange": -6,
+    "quarterChangeByPeriod": {
+      "jun2026": 56,
+      "mar2026": -71
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -6,
+      "mar2026": 49
+    },
     "group": true,
     "jun2025": 52,
     "sep2025": 130,
     "dec2025": 109,
     "mar2026": 31,
-    "jun2026": 49
+    "jun2026": 49,
+    "mar2025": 21
   },
   {
     "produce": "Bowl Cabbage (white)",
     "values": [
+      0,
       26,
       303,
       201,
@@ -353,15 +503,25 @@ export const quantitySupplied = [
     ],
     "quarterChange": 433,
     "annualChange": -41,
+    "quarterChangeByPeriod": {
+      "jun2026": 433,
+      "mar2026": -99
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -41,
+      "mar2026": 1000
+    },
     "jun2025": 26,
     "sep2025": 303,
     "dec2025": 201,
     "mar2026": 3,
-    "jun2026": 16
+    "jun2026": 16,
+    "mar2025": 0
   },
   {
     "produce": "Bowl Cabbage (purple)",
     "values": [
+      0,
       0,
       28,
       55,
@@ -370,15 +530,25 @@ export const quantitySupplied = [
     ],
     "quarterChange": 0,
     "annualChange": 0,
+    "quarterChangeByPeriod": {
+      "jun2026": 0,
+      "mar2026": -100
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 0,
+      "mar2026": -100
+    },
     "jun2025": 0,
     "sep2025": 28,
     "dec2025": 55,
     "mar2026": 0,
-    "jun2026": 0
+    "jun2026": 0,
+    "mar2025": 0
   },
   {
     "produce": "Carrot",
     "values": [
+      0,
       2,
       10,
       15,
@@ -387,15 +557,25 @@ export const quantitySupplied = [
     ],
     "quarterChange": 79,
     "annualChange": 353,
+    "quarterChangeByPeriod": {
+      "jun2026": 79,
+      "mar2026": -64
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 353,
+      "mar2026": 100
+    },
     "jun2025": 2,
     "sep2025": 10,
     "dec2025": 15,
     "mar2026": 5,
-    "jun2026": 10
+    "jun2026": 10,
+    "mar2025": 0
   },
   {
     "produce": "Chinese Cabbage",
     "values": [
+      36,
       70,
       108,
       53,
@@ -404,15 +584,25 @@ export const quantitySupplied = [
     ],
     "quarterChange": 60,
     "annualChange": -3,
+    "quarterChangeByPeriod": {
+      "jun2026": 60,
+      "mar2026": -20
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -3,
+      "mar2026": 17
+    },
     "jun2025": 70,
     "sep2025": 108,
     "dec2025": 53,
     "mar2026": 42,
-    "jun2026": 68
+    "jun2026": 68,
+    "mar2025": 36
   },
   {
     "produce": "Cucumber",
     "values": [
+      36,
       141,
       153,
       146,
@@ -421,15 +611,25 @@ export const quantitySupplied = [
     ],
     "quarterChange": 250,
     "annualChange": 28,
+    "quarterChangeByPeriod": {
+      "jun2026": 250,
+      "mar2026": -64
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 28,
+      "mar2026": 45
+    },
     "jun2025": 141,
     "sep2025": 153,
     "dec2025": 146,
     "mar2026": 52,
-    "jun2026": 181
+    "jun2026": 181,
+    "mar2025": 36
   },
   {
     "produce": "Pumpkin",
     "values": [
+      81,
       84,
       251,
       127,
@@ -438,15 +638,25 @@ export const quantitySupplied = [
     ],
     "quarterChange": 595,
     "annualChange": -27,
+    "quarterChangeByPeriod": {
+      "jun2026": 595,
+      "mar2026": -93
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -27,
+      "mar2026": -89
+    },
     "jun2025": 84,
     "sep2025": 251,
     "dec2025": 127,
     "mar2026": 9,
-    "jun2026": 61
+    "jun2026": 61,
+    "mar2025": 81
   },
   {
     "produce": "Island Cabbage",
     "values": [
+      36,
       111,
       90,
       144,
@@ -455,15 +665,25 @@ export const quantitySupplied = [
     ],
     "quarterChange": -46,
     "annualChange": -30,
+    "quarterChangeByPeriod": {
+      "jun2026": -46,
+      "mar2026": 2
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -30,
+      "mar2026": 305
+    },
     "jun2025": 111,
     "sep2025": 90,
     "dec2025": 144,
     "mar2026": 146,
-    "jun2026": 78
+    "jun2026": 78,
+    "mar2025": 36
   },
   {
     "produce": "Lettuce",
     "values": [
+      0,
       8,
       39,
       35,
@@ -472,15 +692,25 @@ export const quantitySupplied = [
     ],
     "quarterChange": 100,
     "annualChange": -12,
+    "quarterChangeByPeriod": {
+      "jun2026": 100,
+      "mar2026": -100
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -12,
+      "mar2026": -100
+    },
     "jun2025": 8,
     "sep2025": 39,
     "dec2025": 35,
     "mar2026": 0,
-    "jun2026": 7
+    "jun2026": 7,
+    "mar2025": 0
   },
   {
     "produce": "Tomato",
     "values": [
+      0,
       26,
       192,
       203,
@@ -489,11 +719,20 @@ export const quantitySupplied = [
     ],
     "quarterChange": -24,
     "annualChange": -28,
+    "quarterChangeByPeriod": {
+      "jun2026": -24,
+      "mar2026": -88
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -28,
+      "mar2026": 100
+    },
     "jun2025": 26,
     "sep2025": 192,
     "dec2025": 203,
     "mar2026": 25,
-    "jun2026": 19
+    "jun2026": 19,
+    "mar2025": 0
   }
 ]
 
@@ -501,6 +740,7 @@ export const averagePrice = [
   {
     "produce": "STAPLE PRODUCE",
     "values": [
+      187,
       150,
       173,
       149,
@@ -509,16 +749,26 @@ export const averagePrice = [
     ],
     "quarterChange": 6,
     "annualChange": 13,
+    "quarterChangeByPeriod": {
+      "jun2026": 6,
+      "mar2026": 7
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 13,
+      "mar2026": -14
+    },
     "group": true,
     "jun2025": 150,
     "sep2025": 173,
     "dec2025": 149,
     "mar2026": 160,
-    "jun2026": 170
+    "jun2026": 170,
+    "mar2025": 187
   },
   {
     "produce": "Fiji Taro",
     "values": [
+      132,
       145,
       158,
       156,
@@ -527,15 +777,25 @@ export const averagePrice = [
     ],
     "quarterChange": -8,
     "annualChange": 16,
+    "quarterChangeByPeriod": {
+      "jun2026": -8,
+      "mar2026": 18
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 16,
+      "mar2026": 40
+    },
     "jun2025": 145,
     "sep2025": 158,
     "dec2025": 156,
     "mar2026": 184,
-    "jun2026": 169
+    "jun2026": 169,
+    "mar2025": 132
   },
   {
     "produce": "Island Taro",
     "values": [
+      168,
       209,
       194,
       233,
@@ -544,15 +804,25 @@ export const averagePrice = [
     ],
     "quarterChange": -24,
     "annualChange": 7,
+    "quarterChangeByPeriod": {
+      "jun2026": -24,
+      "mar2026": 27
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 7,
+      "mar2026": 76
+    },
     "jun2025": 209,
     "sep2025": 194,
     "dec2025": 233,
     "mar2026": 296,
-    "jun2026": 225
+    "jun2026": 225,
+    "mar2025": 168
   },
   {
     "produce": "Manioc",
     "values": [
+      144,
       65,
       93,
       61,
@@ -561,15 +831,25 @@ export const averagePrice = [
     ],
     "quarterChange": 4,
     "annualChange": 8,
+    "quarterChangeByPeriod": {
+      "jun2026": 4,
+      "mar2026": 10
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 8,
+      "mar2026": -54
+    },
     "jun2025": 65,
     "sep2025": 93,
     "dec2025": 61,
     "mar2026": 67,
-    "jun2026": 70
+    "jun2026": 70,
+    "mar2025": 144
   },
   {
     "produce": "Sweet Potato (Kumala)",
     "values": [
+      172,
       147,
       158,
       124,
@@ -578,15 +858,25 @@ export const averagePrice = [
     ],
     "quarterChange": 30,
     "annualChange": 20,
+    "quarterChangeByPeriod": {
+      "jun2026": 30,
+      "mar2026": 9
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 20,
+      "mar2026": -22
+    },
     "jun2025": 147,
     "sep2025": 158,
     "dec2025": 124,
     "mar2026": 135,
-    "jun2026": 176
+    "jun2026": 176,
+    "mar2025": 172
   },
   {
     "produce": "Yam",
     "values": [
+      398,
       328,
       354,
       275,
@@ -595,15 +885,25 @@ export const averagePrice = [
     ],
     "quarterChange": 14,
     "annualChange": -1,
+    "quarterChangeByPeriod": {
+      "jun2026": 14,
+      "mar2026": 4
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -1,
+      "mar2026": -28
+    },
     "jun2025": 328,
     "sep2025": 354,
     "dec2025": 275,
     "mar2026": 286,
-    "jun2026": 325
+    "jun2026": 325,
+    "mar2025": 398
   },
   {
     "produce": "Banana - green",
     "values": [
+      136,
       82,
       139,
       93,
@@ -612,15 +912,25 @@ export const averagePrice = [
     ],
     "quarterChange": 36,
     "annualChange": 13,
+    "quarterChangeByPeriod": {
+      "jun2026": 36,
+      "mar2026": -27
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 13,
+      "mar2026": -50
+    },
     "jun2025": 82,
     "sep2025": 139,
     "dec2025": 93,
     "mar2026": 68,
-    "jun2026": 93
+    "jun2026": 93,
+    "mar2025": 136
   },
   {
     "produce": "Dried coconut",
     "values": [
+      155,
       77,
       117,
       101,
@@ -629,15 +939,25 @@ export const averagePrice = [
     ],
     "quarterChange": 61,
     "annualChange": 75,
+    "quarterChangeByPeriod": {
+      "jun2026": 61,
+      "mar2026": -17
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 75,
+      "mar2026": -46
+    },
     "jun2025": 77,
     "sep2025": 117,
     "dec2025": 101,
     "mar2026": 84,
-    "jun2026": 134
+    "jun2026": 134,
+    "mar2025": 155
   },
   {
     "produce": "FRUITS",
     "values": [
+      173,
       212,
       193,
       202,
@@ -646,16 +966,26 @@ export const averagePrice = [
     ],
     "quarterChange": 11,
     "annualChange": 23,
+    "quarterChangeByPeriod": {
+      "jun2026": 11,
+      "mar2026": 16
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 23,
+      "mar2026": 36
+    },
     "group": true,
     "jun2025": 212,
     "sep2025": 193,
     "dec2025": 202,
     "mar2026": 235,
-    "jun2026": 261
+    "jun2026": 261,
+    "mar2025": 173
   },
   {
     "produce": "Banana, Ripe",
     "values": [
+      153,
       187,
       183,
       130,
@@ -664,15 +994,25 @@ export const averagePrice = [
     ],
     "quarterChange": 226,
     "annualChange": 43,
+    "quarterChangeByPeriod": {
+      "jun2026": 226,
+      "mar2026": -37
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 43,
+      "mar2026": -47
+    },
     "jun2025": 187,
     "sep2025": 183,
     "dec2025": 130,
     "mar2026": 82,
-    "jun2026": 266
+    "jun2026": 266,
+    "mar2025": 153
   },
   {
     "produce": "Pawpaw",
     "values": [
+      113,
       102,
       107,
       117,
@@ -681,15 +1021,25 @@ export const averagePrice = [
     ],
     "quarterChange": 37,
     "annualChange": 5,
+    "quarterChangeByPeriod": {
+      "jun2026": 37,
+      "mar2026": -33
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 5,
+      "mar2026": -31
+    },
     "jun2025": 102,
     "sep2025": 107,
     "dec2025": 117,
     "mar2026": 79,
-    "jun2026": 108
+    "jun2026": 108,
+    "mar2025": 113
   },
   {
     "produce": "Water Melon",
     "values": [
+      270,
       300,
       253,
       327,
@@ -698,15 +1048,25 @@ export const averagePrice = [
     ],
     "quarterChange": -24,
     "annualChange": 46,
+    "quarterChangeByPeriod": {
+      "jun2026": -24,
+      "mar2026": 77
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 46,
+      "mar2026": 114
+    },
     "jun2025": 300,
     "sep2025": 253,
     "dec2025": 327,
     "mar2026": 579,
-    "jun2026": 439
+    "jun2026": 439,
+    "mar2025": 270
   },
   {
     "produce": "Green coconut",
     "values": [
+      154,
       260,
       227,
       234,
@@ -715,15 +1075,25 @@ export const averagePrice = [
     ],
     "quarterChange": 13,
     "annualChange": -12,
+    "quarterChangeByPeriod": {
+      "jun2026": 13,
+      "mar2026": -14
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -12,
+      "mar2026": 32
+    },
     "jun2025": 260,
     "sep2025": 227,
     "dec2025": 234,
     "mar2026": 203,
-    "jun2026": 230
+    "jun2026": 230,
+    "mar2025": 154
   },
   {
     "produce": "VEGETABLE PRODUCE",
     "values": [
+      332,
       348,
       311,
       334,
@@ -732,16 +1102,26 @@ export const averagePrice = [
     ],
     "quarterChange": -19,
     "annualChange": -18,
+    "quarterChangeByPeriod": {
+      "jun2026": -19,
+      "mar2026": 5
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -18,
+      "mar2026": 6
+    },
     "group": true,
     "jun2025": 348,
     "sep2025": 311,
     "dec2025": 334,
     "mar2026": 351,
-    "jun2026": 284
+    "jun2026": 284,
+    "mar2025": 332
   },
   {
     "produce": "Bowl Cabbage (white)",
     "values": [
+      0,
       235,
       176,
       331,
@@ -750,15 +1130,25 @@ export const averagePrice = [
     ],
     "quarterChange": -21,
     "annualChange": 58,
+    "quarterChangeByPeriod": {
+      "jun2026": -21,
+      "mar2026": 43
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 58,
+      "mar2026": 100
+    },
     "jun2025": 235,
     "sep2025": 176,
     "dec2025": 331,
     "mar2026": 474,
-    "jun2026": 372
+    "jun2026": 372,
+    "mar2025": 0
   },
   {
     "produce": "Bowl Cabbage (purple)",
     "values": [
+      0,
       0,
       339,
       406,
@@ -767,15 +1157,25 @@ export const averagePrice = [
     ],
     "quarterChange": 0,
     "annualChange": 0,
+    "quarterChangeByPeriod": {
+      "jun2026": 0,
+      "mar2026": -100
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 0,
+      "mar2026": -100
+    },
     "jun2025": 0,
     "sep2025": 339,
     "dec2025": 406,
     "mar2026": 0,
-    "jun2026": 0
+    "jun2026": 0,
+    "mar2025": 0
   },
   {
     "produce": "Carrot",
     "values": [
+      0,
       484,
       483,
       315,
@@ -784,15 +1184,25 @@ export const averagePrice = [
     ],
     "quarterChange": -54,
     "annualChange": -32,
+    "quarterChangeByPeriod": {
+      "jun2026": -54,
+      "mar2026": 128
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -32,
+      "mar2026": 100
+    },
     "jun2025": 484,
     "sep2025": 483,
     "dec2025": 315,
     "mar2026": 717,
-    "jun2026": 329
+    "jun2026": 329,
+    "mar2025": 0
   },
   {
     "produce": "Chinese Cabbage",
     "values": [
+      1061,
       380,
       213,
       243,
@@ -801,15 +1211,25 @@ export const averagePrice = [
     ],
     "quarterChange": -38,
     "annualChange": 11,
+    "quarterChangeByPeriod": {
+      "jun2026": -38,
+      "mar2026": 183
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 11,
+      "mar2026": -35
+    },
     "jun2025": 380,
     "sep2025": 213,
     "dec2025": 243,
     "mar2026": 687,
-    "jun2026": 424
+    "jun2026": 424,
+    "mar2025": 1061
   },
   {
     "produce": "Cucumber",
     "values": [
+      852,
       315,
       289,
       457,
@@ -818,15 +1238,25 @@ export const averagePrice = [
     ],
     "quarterChange": -12,
     "annualChange": 16,
+    "quarterChangeByPeriod": {
+      "jun2026": -12,
+      "mar2026": -9
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 16,
+      "mar2026": -51
+    },
     "jun2025": 315,
     "sep2025": 289,
     "dec2025": 457,
     "mar2026": 417,
-    "jun2026": 366
+    "jun2026": 366,
+    "mar2025": 852
   },
   {
     "produce": "Pumpkin",
     "values": [
+      517,
       117,
       207,
       228,
@@ -835,15 +1265,25 @@ export const averagePrice = [
     ],
     "quarterChange": 90,
     "annualChange": 94,
+    "quarterChangeByPeriod": {
+      "jun2026": 90,
+      "mar2026": -48
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 94,
+      "mar2026": -77
+    },
     "jun2025": 117,
     "sep2025": 207,
     "dec2025": 228,
     "mar2026": 119,
-    "jun2026": 227
+    "jun2026": 227,
+    "mar2025": 517
   },
   {
     "produce": "Island Cabbage",
     "values": [
+      556,
       183,
       222,
       228,
@@ -852,15 +1292,25 @@ export const averagePrice = [
     ],
     "quarterChange": 89,
     "annualChange": 64,
+    "quarterChangeByPeriod": {
+      "jun2026": 89,
+      "mar2026": -30
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 64,
+      "mar2026": -71
+    },
     "jun2025": 183,
     "sep2025": 222,
     "dec2025": 228,
     "mar2026": 159,
-    "jun2026": 301
+    "jun2026": 301,
+    "mar2025": 556
   },
   {
     "produce": "Lettuce",
     "values": [
+      0,
       520,
       419,
       408,
@@ -869,15 +1319,25 @@ export const averagePrice = [
     ],
     "quarterChange": 100,
     "annualChange": -57,
+    "quarterChangeByPeriod": {
+      "jun2026": 100,
+      "mar2026": -100
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -57,
+      "mar2026": -100
+    },
     "jun2025": 520,
     "sep2025": 419,
     "dec2025": 408,
     "mar2026": 0,
-    "jun2026": 225
+    "jun2026": 225,
+    "mar2025": 0
   },
   {
     "produce": "Tomato",
     "values": [
+      0,
       901,
       450,
       388,
@@ -886,11 +1346,20 @@ export const averagePrice = [
     ],
     "quarterChange": -47,
     "annualChange": -65,
+    "quarterChangeByPeriod": {
+      "jun2026": -47,
+      "mar2026": 51
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -65,
+      "mar2026": 100
+    },
     "jun2025": 901,
     "sep2025": 450,
     "dec2025": 388,
     "mar2026": 585,
-    "jun2026": 312
+    "jun2026": 312,
+    "mar2025": 0
   }
 ]
 
@@ -898,6 +1367,7 @@ export const valueOfSupplies = [
   {
     "produce": "STAPLE PRODUCE",
     "values": [
+      196,
       545,
       608,
       657,
@@ -906,16 +1376,26 @@ export const valueOfSupplies = [
     ],
     "quarterChange": 47,
     "annualChange": 47,
+    "quarterChangeByPeriod": {
+      "jun2026": 47,
+      "mar2026": -17
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 47,
+      "mar2026": 178
+    },
     "group": true,
     "jun2025": 545,
     "sep2025": 608,
     "dec2025": 657,
     "mar2026": 545,
-    "jun2026": 802
+    "jun2026": 802,
+    "mar2025": 196
   },
   {
     "produce": "Fiji Taro",
     "values": [
+      16,
       37,
       36,
       62,
@@ -924,15 +1404,25 @@ export const valueOfSupplies = [
     ],
     "quarterChange": 64,
     "annualChange": 45,
+    "quarterChangeByPeriod": {
+      "jun2026": 64,
+      "mar2026": -47
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 45,
+      "mar2026": 110
+    },
     "jun2025": 37,
     "sep2025": 36,
     "dec2025": 62,
     "mar2026": 33,
-    "jun2026": 54
+    "jun2026": 54,
+    "mar2025": 16
   },
   {
     "produce": "Island Taro",
     "values": [
+      20,
       159,
       185,
       153,
@@ -941,15 +1431,25 @@ export const valueOfSupplies = [
     ],
     "quarterChange": 91,
     "annualChange": 90,
+    "quarterChangeByPeriod": {
+      "jun2026": 91,
+      "mar2026": 3
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 90,
+      "mar2026": 685
+    },
     "jun2025": 159,
     "sep2025": 185,
     "dec2025": 153,
     "mar2026": 158,
-    "jun2026": 302
+    "jun2026": 302,
+    "mar2025": 20
   },
   {
     "produce": "Manioc",
     "values": [
+      22,
       39,
       38,
       22,
@@ -958,15 +1458,25 @@ export const valueOfSupplies = [
     ],
     "quarterChange": 23,
     "annualChange": -37,
+    "quarterChangeByPeriod": {
+      "jun2026": 23,
+      "mar2026": -11
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -37,
+      "mar2026": -9
+    },
     "jun2025": 39,
     "sep2025": 38,
     "dec2025": 22,
     "mar2026": 20,
-    "jun2026": 24
+    "jun2026": 24,
+    "mar2025": 22
   },
   {
     "produce": "Sweet Potato (Kumala)",
     "values": [
+      23,
       32,
       57,
       180,
@@ -975,15 +1485,25 @@ export const valueOfSupplies = [
     ],
     "quarterChange": -78,
     "annualChange": -8,
+    "quarterChangeByPeriod": {
+      "jun2026": -78,
+      "mar2026": -25
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -8,
+      "mar2026": 482
+    },
     "jun2025": 32,
     "sep2025": 57,
     "dec2025": 180,
     "mar2026": 134,
-    "jun2026": 29
+    "jun2026": 29,
+    "mar2025": 23
   },
   {
     "produce": "Yam",
     "values": [
+      24,
       166,
       169,
       83,
@@ -992,15 +1512,25 @@ export const valueOfSupplies = [
     ],
     "quarterChange": 1019,
     "annualChange": 75,
+    "quarterChangeByPeriod": {
+      "jun2026": 1019,
+      "mar2026": -69
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 75,
+      "mar2026": 9
+    },
     "jun2025": 166,
     "sep2025": 169,
     "dec2025": 83,
     "mar2026": 26,
-    "jun2026": 291
+    "jun2026": 291,
+    "mar2025": 24
   },
   {
     "produce": "Banana - green",
     "values": [
+      29,
       53,
       55,
       77,
@@ -1009,15 +1539,25 @@ export const valueOfSupplies = [
     ],
     "quarterChange": -40,
     "annualChange": -48,
+    "quarterChangeByPeriod": {
+      "jun2026": -40,
+      "mar2026": -41
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -48,
+      "mar2026": 55
+    },
     "jun2025": 53,
     "sep2025": 55,
     "dec2025": 77,
     "mar2026": 46,
-    "jun2026": 28
+    "jun2026": 28,
+    "mar2025": 29
   },
   {
     "produce": "Dried coconut",
     "values": [
+      62,
       59,
       68,
       80,
@@ -1026,15 +1566,25 @@ export const valueOfSupplies = [
     ],
     "quarterChange": -43,
     "annualChange": 25,
+    "quarterChangeByPeriod": {
+      "jun2026": -43,
+      "mar2026": 61
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 25,
+      "mar2026": 106
+    },
     "jun2025": 59,
     "sep2025": 68,
     "dec2025": 80,
     "mar2026": 129,
-    "jun2026": 74
+    "jun2026": 74,
+    "mar2025": 62
   },
   {
     "produce": "FRUITS",
     "values": [
+      124,
       138,
       245,
       444,
@@ -1043,16 +1593,26 @@ export const valueOfSupplies = [
     ],
     "quarterChange": -15,
     "annualChange": 58,
+    "quarterChangeByPeriod": {
+      "jun2026": -15,
+      "mar2026": -42
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 58,
+      "mar2026": 107
+    },
     "group": true,
     "jun2025": 138,
     "sep2025": 245,
     "dec2025": 444,
     "mar2026": 257,
-    "jun2026": 219
+    "jun2026": 219,
+    "mar2025": 124
   },
   {
     "produce": "Banana, Ripe",
     "values": [
+      19,
       83,
       130,
       139,
@@ -1061,15 +1621,25 @@ export const valueOfSupplies = [
     ],
     "quarterChange": 67,
     "annualChange": 45,
+    "quarterChangeByPeriod": {
+      "jun2026": 67,
+      "mar2026": -48
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 45,
+      "mar2026": 290
+    },
     "jun2025": 83,
     "sep2025": 130,
     "dec2025": 139,
     "mar2026": 72,
-    "jun2026": 121
+    "jun2026": 121,
+    "mar2025": 19
   },
   {
     "produce": "Pawpaw",
     "values": [
+      11,
       39,
       52,
       88,
@@ -1078,15 +1648,25 @@ export const valueOfSupplies = [
     ],
     "quarterChange": 19,
     "annualChange": -22,
+    "quarterChangeByPeriod": {
+      "jun2026": 19,
+      "mar2026": -71
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -22,
+      "mar2026": 142
+    },
     "jun2025": 39,
     "sep2025": 52,
     "dec2025": 88,
     "mar2026": 26,
-    "jun2026": 31
+    "jun2026": 31,
+    "mar2025": 11
   },
   {
     "produce": "Water Melon",
     "values": [
+      85,
       8,
       39,
       189,
@@ -1095,15 +1675,25 @@ export const valueOfSupplies = [
     ],
     "quarterChange": -65,
     "annualChange": 474,
+    "quarterChangeByPeriod": {
+      "jun2026": -65,
+      "mar2026": -26
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 474,
+      "mar2026": 65
+    },
     "jun2025": 8,
     "sep2025": 39,
     "dec2025": 189,
     "mar2026": 140,
-    "jun2026": 49
+    "jun2026": 49,
+    "mar2025": 85
   },
   {
     "produce": "Green coconut",
     "values": [
+      10,
       7,
       24,
       27,
@@ -1112,15 +1702,25 @@ export const valueOfSupplies = [
     ],
     "quarterChange": -4,
     "annualChange": 155,
+    "quarterChangeByPeriod": {
+      "jun2026": -4,
+      "mar2026": -30
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 155,
+      "mar2026": 93
+    },
     "jun2025": 7,
     "sep2025": 24,
     "dec2025": 27,
     "mar2026": 19,
-    "jun2026": 18
+    "jun2026": 18,
+    "mar2025": 10
   },
   {
     "produce": "VEGETABLE PRODUCE",
     "values": [
+      131,
       136,
       310,
       328,
@@ -1129,16 +1729,26 @@ export const valueOfSupplies = [
     ],
     "quarterChange": 57,
     "annualChange": 9,
+    "quarterChangeByPeriod": {
+      "jun2026": 57,
+      "mar2026": -71
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 9,
+      "mar2026": -28
+    },
     "group": true,
     "jun2025": 136,
     "sep2025": 310,
     "dec2025": 328,
     "mar2026": 95,
-    "jun2026": 149
+    "jun2026": 149,
+    "mar2025": 131
   },
   {
     "produce": "Bowl Cabbage (white)",
     "values": [
+      0,
       6,
       53,
       67,
@@ -1147,15 +1757,25 @@ export const valueOfSupplies = [
     ],
     "quarterChange": 319,
     "annualChange": -6,
+    "quarterChangeByPeriod": {
+      "jun2026": 319,
+      "mar2026": -98
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -6,
+      "mar2026": 100
+    },
     "jun2025": 6,
     "sep2025": 53,
     "dec2025": 67,
     "mar2026": 1,
-    "jun2026": 6
+    "jun2026": 6,
+    "mar2025": 0
   },
   {
     "produce": "Bowl Cabbage (purple)",
     "values": [
+      0,
       0,
       9,
       22,
@@ -1164,15 +1784,25 @@ export const valueOfSupplies = [
     ],
     "quarterChange": 0,
     "annualChange": 0,
+    "quarterChangeByPeriod": {
+      "jun2026": 0,
+      "mar2026": -100
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 0,
+      "mar2026": -100
+    },
     "jun2025": 0,
     "sep2025": 9,
     "dec2025": 22,
     "mar2026": 0,
-    "jun2026": 0
+    "jun2026": 0,
+    "mar2025": 0
   },
   {
     "produce": "Carrot",
     "values": [
+      0,
       1,
       5,
       5,
@@ -1181,15 +1811,25 @@ export const valueOfSupplies = [
     ],
     "quarterChange": -18,
     "annualChange": 207,
+    "quarterChangeByPeriod": {
+      "jun2026": -18,
+      "mar2026": -17
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 207,
+      "mar2026": 100
+    },
     "jun2025": 1,
     "sep2025": 5,
     "dec2025": 5,
     "mar2026": 4,
-    "jun2026": 3
+    "jun2026": 3,
+    "mar2025": 0
   },
   {
     "produce": "Chinese Cabbage",
     "values": [
+      38,
       26,
       23,
       13,
@@ -1198,15 +1838,25 @@ export const valueOfSupplies = [
     ],
     "quarterChange": -1,
     "annualChange": 9,
+    "quarterChangeByPeriod": {
+      "jun2026": -1,
+      "mar2026": 126
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 9,
+      "mar2026": -24
+    },
     "jun2025": 26,
     "sep2025": 23,
     "dec2025": 13,
     "mar2026": 29,
-    "jun2026": 29
+    "jun2026": 29,
+    "mar2025": 38
   },
   {
     "produce": "Cucumber",
     "values": [
+      30,
       45,
       44,
       67,
@@ -1215,15 +1865,25 @@ export const valueOfSupplies = [
     ],
     "quarterChange": 208,
     "annualChange": 49,
+    "quarterChangeByPeriod": {
+      "jun2026": 208,
+      "mar2026": -68
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 49,
+      "mar2026": -29
+    },
     "jun2025": 45,
     "sep2025": 44,
     "dec2025": 67,
     "mar2026": 22,
-    "jun2026": 66
+    "jun2026": 66,
+    "mar2025": 30
   },
   {
     "produce": "Pumpkin",
     "values": [
+      42,
       10,
       52,
       29,
@@ -1232,15 +1892,25 @@ export const valueOfSupplies = [
     ],
     "quarterChange": 1220,
     "annualChange": 41,
+    "quarterChangeByPeriod": {
+      "jun2026": 1220,
+      "mar2026": -96
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 41,
+      "mar2026": -98
+    },
     "jun2025": 10,
     "sep2025": 52,
     "dec2025": 29,
     "mar2026": 1,
-    "jun2026": 14
+    "jun2026": 14,
+    "mar2025": 42
   },
   {
     "produce": "Island Cabbage",
     "values": [
+      20,
       20,
       20,
       33,
@@ -1249,15 +1919,25 @@ export const valueOfSupplies = [
     ],
     "quarterChange": 2,
     "annualChange": 16,
+    "quarterChangeByPeriod": {
+      "jun2026": 2,
+      "mar2026": -29
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 16,
+      "mar2026": 16
+    },
     "jun2025": 20,
     "sep2025": 20,
     "dec2025": 33,
     "mar2026": 23,
-    "jun2026": 24
+    "jun2026": 24,
+    "mar2025": 20
   },
   {
     "produce": "Lettuce",
     "values": [
+      0,
       4,
       17,
       14,
@@ -1266,15 +1946,25 @@ export const valueOfSupplies = [
     ],
     "quarterChange": 100,
     "annualChange": -62,
+    "quarterChangeByPeriod": {
+      "jun2026": 100,
+      "mar2026": -100
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -62,
+      "mar2026": -100
+    },
     "jun2025": 4,
     "sep2025": 17,
     "dec2025": 14,
     "mar2026": 0,
-    "jun2026": 2
+    "jun2026": 2,
+    "mar2025": 0
   },
   {
     "produce": "Tomato",
     "values": [
+      0,
       23,
       87,
       79,
@@ -1283,15 +1973,25 @@ export const valueOfSupplies = [
     ],
     "quarterChange": -60,
     "annualChange": -75,
+    "quarterChangeByPeriod": {
+      "jun2026": -60,
+      "mar2026": -82
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -75,
+      "mar2026": 100
+    },
     "jun2025": 23,
     "sep2025": 87,
     "dec2025": 79,
     "mar2026": 14,
-    "jun2026": 6
+    "jun2026": 6,
+    "mar2025": 0
   },
   {
     "produce": "",
     "values": [
+      451,
       819,
       1163,
       1429,
@@ -1300,11 +2000,20 @@ export const valueOfSupplies = [
     ],
     "quarterChange": 30,
     "annualChange": 43,
+    "quarterChangeByPeriod": {
+      "jun2026": 30,
+      "mar2026": -37
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 43,
+      "mar2026": 99
+    },
     "jun2025": 819,
     "sep2025": 1163,
     "dec2025": 1429,
     "mar2026": 897,
-    "jun2026": 1169
+    "jun2026": 1169,
+    "mar2025": 451
   }
 ]
 
@@ -1312,6 +2021,7 @@ export const volumeIndexData = [
   {
     "produce": "STAPLE PRODUCE",
     "values": [
+      37,
       115,
       104,
       146,
@@ -1320,16 +2030,26 @@ export const volumeIndexData = [
     ],
     "quarterChange": -9,
     "annualChange": 4,
+    "quarterChangeByPeriod": {
+      "jun2026": -9,
+      "mar2026": -10
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 4,
+      "mar2026": 258
+    },
     "group": true,
     "jun2025": 115,
     "sep2025": 104,
     "dec2025": 146,
     "mar2026": 132,
-    "jun2026": 120
+    "jun2026": 120,
+    "mar2025": 37
   },
   {
     "produce": "Fiji Taro",
     "values": [
+      159,
       341,
       310,
       533,
@@ -1338,15 +2058,25 @@ export const volumeIndexData = [
     ],
     "quarterChange": 78,
     "annualChange": 25,
+    "quarterChangeByPeriod": {
+      "jun2026": 78,
+      "mar2026": -55
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 25,
+      "mar2026": 50
+    },
     "jun2025": 341,
     "sep2025": 310,
     "dec2025": 533,
     "mar2026": 239,
-    "jun2026": 427
+    "jun2026": 427,
+    "mar2025": 159
   },
   {
     "produce": "Island Taro",
     "values": [
+      22,
       138,
       173,
       119,
@@ -1355,15 +2085,25 @@ export const volumeIndexData = [
     ],
     "quarterChange": 151,
     "annualChange": 77,
+    "quarterChangeByPeriod": {
+      "jun2026": 151,
+      "mar2026": -19
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 77,
+      "mar2026": 346
+    },
     "jun2025": 138,
     "sep2025": 173,
     "dec2025": 119,
     "mar2026": 97,
-    "jun2026": 244
+    "jun2026": 244,
+    "mar2025": 22
   },
   {
     "produce": "Manioc",
     "values": [
+      29,
       113,
       76,
       68,
@@ -1372,15 +2112,25 @@ export const volumeIndexData = [
     ],
     "quarterChange": 18,
     "annualChange": -42,
+    "quarterChangeByPeriod": {
+      "jun2026": 18,
+      "mar2026": -18
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -42,
+      "mar2026": 96
+    },
     "jun2025": 113,
     "sep2025": 76,
     "dec2025": 68,
     "mar2026": 56,
-    "jun2026": 66
+    "jun2026": 66,
+    "mar2025": 29
   },
   {
     "produce": "Sweet Potato (Kumala)",
     "values": [
+      14,
       23,
       37,
       151,
@@ -1389,15 +2139,25 @@ export const volumeIndexData = [
     ],
     "quarterChange": -83,
     "annualChange": -23,
+    "quarterChangeByPeriod": {
+      "jun2026": -83,
+      "mar2026": -31
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -23,
+      "mar2026": 641
+    },
     "jun2025": 23,
     "sep2025": 37,
     "dec2025": 151,
     "mar2026": 104,
-    "jun2026": 17
+    "jun2026": 17,
+    "mar2025": 14
   },
   {
     "produce": "Yam",
     "values": [
+      24,
       203,
       191,
       121,
@@ -1406,15 +2166,25 @@ export const volumeIndexData = [
     ],
     "quarterChange": 885,
     "annualChange": 76,
+    "quarterChangeByPeriod": {
+      "jun2026": 885,
+      "mar2026": -70
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 76,
+      "mar2026": 52
+    },
     "jun2025": 203,
     "sep2025": 191,
     "dec2025": 121,
     "mar2026": 36,
-    "jun2026": 359
+    "jun2026": 359,
+    "mar2025": 24
   },
   {
     "produce": "Banana - green",
     "values": [
+      85,
       254,
       156,
       325,
@@ -1423,15 +2193,25 @@ export const volumeIndexData = [
     ],
     "quarterChange": -56,
     "annualChange": -54,
+    "quarterChangeByPeriod": {
+      "jun2026": -56,
+      "mar2026": -20
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -54,
+      "mar2026": 208
+    },
     "jun2025": 254,
     "sep2025": 156,
     "dec2025": 325,
     "mar2026": 261,
-    "jun2026": 116
+    "jun2026": 116,
+    "mar2025": 85
   },
   {
     "produce": "Dried coconut",
     "values": [
+      62,
       118,
       89,
       122,
@@ -1440,15 +2220,25 @@ export const volumeIndexData = [
     ],
     "quarterChange": -64,
     "annualChange": -28,
+    "quarterChangeByPeriod": {
+      "jun2026": -64,
+      "mar2026": 94
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -28,
+      "mar2026": 284
+    },
     "jun2025": 118,
     "sep2025": 89,
     "dec2025": 122,
     "mar2026": 237,
-    "jun2026": 85
+    "jun2026": 85,
+    "mar2025": 62
   },
   {
     "produce": "FRUITS",
     "values": [
+      34,
       50,
       83,
       143,
@@ -1457,16 +2247,26 @@ export const volumeIndexData = [
     ],
     "quarterChange": -40,
     "annualChange": 5,
+    "quarterChangeByPeriod": {
+      "jun2026": -40,
+      "mar2026": -38
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 5,
+      "mar2026": 161
+    },
     "group": true,
     "jun2025": 50,
     "sep2025": 83,
     "dec2025": 143,
     "mar2026": 88,
-    "jun2026": 53
+    "jun2026": 53,
+    "mar2025": 34
   },
   {
     "produce": "Banana, Ripe",
     "values": [
+      28,
       103,
       163,
       247,
@@ -1475,15 +2275,25 @@ export const volumeIndexData = [
     ],
     "quarterChange": -49,
     "annualChange": 2,
+    "quarterChangeByPeriod": {
+      "jun2026": -49,
+      "mar2026": -17
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 2,
+      "mar2026": 631
+    },
     "jun2025": 103,
     "sep2025": 163,
     "dec2025": 247,
     "mar2026": 204,
-    "jun2026": 105
+    "jun2026": 105,
+    "mar2025": 28
   },
   {
     "produce": "Pawpaw",
     "values": [
+      16,
       67,
       85,
       132,
@@ -1492,15 +2302,25 @@ export const volumeIndexData = [
     ],
     "quarterChange": -13,
     "annualChange": -26,
+    "quarterChangeByPeriod": {
+      "jun2026": -13,
+      "mar2026": -56
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -26,
+      "mar2026": 250
+    },
     "jun2025": 67,
     "sep2025": 85,
     "dec2025": 132,
     "mar2026": 58,
-    "jun2026": 50
+    "jun2026": 50,
+    "mar2025": 16
   },
   {
     "produce": "Water Melon",
     "values": [
+      70,
       6,
       35,
       129,
@@ -1509,15 +2329,25 @@ export const volumeIndexData = [
     ],
     "quarterChange": -54,
     "annualChange": 292,
+    "quarterChangeByPeriod": {
+      "jun2026": -54,
+      "mar2026": -58
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 292,
+      "mar2026": -23
+    },
     "jun2025": 6,
     "sep2025": 35,
     "dec2025": 129,
     "mar2026": 54,
-    "jun2026": 25
+    "jun2026": 25,
+    "mar2025": 70
   },
   {
     "produce": "Green coconut",
     "values": [
+      21,
       9,
       34,
       38,
@@ -1526,15 +2356,25 @@ export const volumeIndexData = [
     ],
     "quarterChange": -15,
     "annualChange": 188,
+    "quarterChangeByPeriod": {
+      "jun2026": -15,
+      "mar2026": -20
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 188,
+      "mar2026": 47
+    },
     "jun2025": 9,
     "sep2025": 34,
     "dec2025": 38,
     "mar2026": 30,
-    "jun2026": 26
+    "jun2026": 26,
+    "mar2025": 21
   },
   {
     "produce": "VEGETABLE PRODUCE",
     "values": [
+      11,
       26,
       66,
       55,
@@ -1543,16 +2383,26 @@ export const volumeIndexData = [
     ],
     "quarterChange": 56,
     "annualChange": -6,
+    "quarterChangeByPeriod": {
+      "jun2026": 56,
+      "mar2026": -71
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -6,
+      "mar2026": 49
+    },
     "group": true,
     "jun2025": 26,
     "sep2025": 66,
     "dec2025": 55,
     "mar2026": 16,
-    "jun2026": 25
+    "jun2026": 25,
+    "mar2025": 11
   },
   {
     "produce": "Bowl Cabbage (white)",
     "values": [
+      0,
       9,
       98,
       65,
@@ -1561,15 +2411,25 @@ export const volumeIndexData = [
     ],
     "quarterChange": 433,
     "annualChange": -41,
+    "quarterChangeByPeriod": {
+      "jun2026": 433,
+      "mar2026": -99
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -41,
+      "mar2026": 100
+    },
     "jun2025": 9,
     "sep2025": 98,
     "dec2025": 65,
     "mar2026": 1,
-    "jun2026": 5
+    "jun2026": 5,
+    "mar2025": 0
   },
   {
     "produce": "Bowl Cabbage (purple)",
     "values": [
+      0,
       0,
       52,
       104,
@@ -1578,15 +2438,25 @@ export const volumeIndexData = [
     ],
     "quarterChange": 0,
     "annualChange": 0,
+    "quarterChangeByPeriod": {
+      "jun2026": 0,
+      "mar2026": -100
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 0,
+      "mar2026": -100
+    },
     "jun2025": 0,
     "sep2025": 52,
     "dec2025": 104,
     "mar2026": 0,
-    "jun2026": 0
+    "jun2026": 0,
+    "mar2025": 0
   },
   {
     "produce": "Carrot",
     "values": [
+      0,
       3,
       13,
       19,
@@ -1595,15 +2465,25 @@ export const volumeIndexData = [
     ],
     "quarterChange": 79,
     "annualChange": 353,
+    "quarterChangeByPeriod": {
+      "jun2026": 79,
+      "mar2026": -64
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 353,
+      "mar2026": 100
+    },
     "jun2025": 3,
     "sep2025": 13,
     "dec2025": 19,
     "mar2026": 7,
-    "jun2026": 12
+    "jun2026": 12,
+    "mar2025": 0
   },
   {
     "produce": "Chinese Cabbage",
     "values": [
+      7,
       13,
       20,
       10,
@@ -1612,15 +2492,25 @@ export const volumeIndexData = [
     ],
     "quarterChange": 60,
     "annualChange": -3,
+    "quarterChangeByPeriod": {
+      "jun2026": 60,
+      "mar2026": -20
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -3,
+      "mar2026": 17
+    },
     "jun2025": 13,
     "sep2025": 20,
     "dec2025": 10,
     "mar2026": 8,
-    "jun2026": 12
+    "jun2026": 12,
+    "mar2025": 7
   },
   {
     "produce": "Cucumber",
     "values": [
+      10,
       41,
       45,
       42,
@@ -1629,15 +2519,25 @@ export const volumeIndexData = [
     ],
     "quarterChange": 250,
     "annualChange": 28,
+    "quarterChangeByPeriod": {
+      "jun2026": 250,
+      "mar2026": -64
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 28,
+      "mar2026": 45
+    },
     "jun2025": 41,
     "sep2025": 45,
     "dec2025": 42,
     "mar2026": 15,
-    "jun2026": 53
+    "jun2026": 53,
+    "mar2025": 10
   },
   {
     "produce": "Pumpkin",
     "values": [
+      180,
       186,
       557,
       282,
@@ -1646,15 +2546,25 @@ export const volumeIndexData = [
     ],
     "quarterChange": 595,
     "annualChange": -27,
+    "quarterChangeByPeriod": {
+      "jun2026": 595,
+      "mar2026": -93
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -27,
+      "mar2026": -89
+    },
     "jun2025": 186,
     "sep2025": 557,
     "dec2025": 282,
     "mar2026": 19,
-    "jun2026": 135
+    "jun2026": 135,
+    "mar2025": 180
   },
   {
     "produce": "Island Cabbage",
     "values": [
+      21,
       65,
       53,
       84,
@@ -1663,15 +2573,25 @@ export const volumeIndexData = [
     ],
     "quarterChange": -46,
     "annualChange": -30,
+    "quarterChangeByPeriod": {
+      "jun2026": -46,
+      "mar2026": 2
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -30,
+      "mar2026": 305
+    },
     "jun2025": 65,
     "sep2025": 53,
     "dec2025": 84,
     "mar2026": 85,
-    "jun2026": 46
+    "jun2026": 46,
+    "mar2025": 21
   },
   {
     "produce": "Lettuce",
     "values": [
+      0,
       18,
       88,
       79,
@@ -1680,15 +2600,25 @@ export const volumeIndexData = [
     ],
     "quarterChange": 100,
     "annualChange": -12,
+    "quarterChangeByPeriod": {
+      "jun2026": 100,
+      "mar2026": -100
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -12,
+      "mar2026": -100
+    },
     "jun2025": 18,
     "sep2025": 88,
     "dec2025": 79,
     "mar2026": 0,
-    "jun2026": 16
+    "jun2026": 16,
+    "mar2025": 0
   },
   {
     "produce": "Tomato",
     "values": [
+      0,
       13,
       97,
       102,
@@ -1697,15 +2627,25 @@ export const volumeIndexData = [
     ],
     "quarterChange": -24,
     "annualChange": -28,
+    "quarterChangeByPeriod": {
+      "jun2026": -24,
+      "mar2026": -88
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -28,
+      "mar2026": 100
+    },
     "jun2025": 13,
     "sep2025": 97,
     "dec2025": 102,
     "mar2026": 12,
-    "jun2026": 9
+    "jun2026": 9,
+    "mar2025": 0
   },
   {
     "produce": "",
     "values": [
+      26,
       72,
       95,
       117,
@@ -1714,11 +2654,20 @@ export const volumeIndexData = [
     ],
     "quarterChange": 17,
     "annualChange": 21,
+    "quarterChangeByPeriod": {
+      "jun2026": 17,
+      "mar2026": -37
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 21,
+      "mar2026": 181
+    },
     "jun2025": 72,
     "sep2025": 95,
     "dec2025": 117,
     "mar2026": 74,
-    "jun2026": 86
+    "jun2026": 86,
+    "mar2025": 26
   }
 ]
 
@@ -1726,6 +2675,7 @@ export const priceIndexData = [
   {
     "produce": "STAPLE PRODUCE",
     "values": [
+      154,
       124,
       143,
       123,
@@ -1734,16 +2684,26 @@ export const priceIndexData = [
     ],
     "quarterChange": 6,
     "annualChange": 13,
+    "quarterChangeByPeriod": {
+      "jun2026": 6,
+      "mar2026": 7
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 13,
+      "mar2026": -14
+    },
     "group": true,
     "jun2025": 124,
     "sep2025": 143,
     "dec2025": 123,
     "mar2026": 132,
-    "jun2026": 140
+    "jun2026": 140,
+    "mar2025": 154
   },
   {
     "produce": "Fiji Taro",
     "values": [
+      96,
       106,
       115,
       114,
@@ -1752,15 +2712,25 @@ export const priceIndexData = [
     ],
     "quarterChange": -8,
     "annualChange": 16,
+    "quarterChangeByPeriod": {
+      "jun2026": -8,
+      "mar2026": 18
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 16,
+      "mar2026": 40
+    },
     "jun2025": 106,
     "sep2025": 115,
     "dec2025": 114,
     "mar2026": 134,
-    "jun2026": 123
+    "jun2026": 123,
+    "mar2025": 96
   },
   {
     "produce": "Island Taro",
     "values": [
+      91,
       113,
       105,
       126,
@@ -1769,15 +2739,25 @@ export const priceIndexData = [
     ],
     "quarterChange": -24,
     "annualChange": 7,
+    "quarterChangeByPeriod": {
+      "jun2026": -24,
+      "mar2026": 27
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 7,
+      "mar2026": 76
+    },
     "jun2025": 113,
     "sep2025": 105,
     "dec2025": 126,
     "mar2026": 159,
-    "jun2026": 121
+    "jun2026": 121,
+    "mar2025": 91
   },
   {
     "produce": "Manioc",
     "values": [
+      261,
       117,
       168,
       110,
@@ -1786,15 +2766,25 @@ export const priceIndexData = [
     ],
     "quarterChange": 4,
     "annualChange": 8,
+    "quarterChangeByPeriod": {
+      "jun2026": 4,
+      "mar2026": 10
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 8,
+      "mar2026": -54
+    },
     "jun2025": 117,
     "sep2025": 168,
     "dec2025": 110,
     "mar2026": 121,
-    "jun2026": 126
+    "jun2026": 126,
+    "mar2025": 261
   },
   {
     "produce": "Sweet Potato (Kumala)",
     "values": [
+      235,
       201,
       217,
       170,
@@ -1803,15 +2793,25 @@ export const priceIndexData = [
     ],
     "quarterChange": 30,
     "annualChange": 20,
+    "quarterChangeByPeriod": {
+      "jun2026": 30,
+      "mar2026": 9
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 20,
+      "mar2026": -22
+    },
     "jun2025": 201,
     "sep2025": 217,
     "dec2025": 170,
     "mar2026": 185,
-    "jun2026": 241
+    "jun2026": 241,
+    "mar2025": 235
   },
   {
     "produce": "Yam",
     "values": [
+      178,
       146,
       158,
       123,
@@ -1820,15 +2820,25 @@ export const priceIndexData = [
     ],
     "quarterChange": 14,
     "annualChange": -1,
+    "quarterChangeByPeriod": {
+      "jun2026": 14,
+      "mar2026": 4
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -1,
+      "mar2026": -28
+    },
     "jun2025": 146,
     "sep2025": 158,
     "dec2025": 123,
     "mar2026": 128,
-    "jun2026": 145
+    "jun2026": 145,
+    "mar2025": 178
   },
   {
     "produce": "Banana - green",
     "values": [
+      115,
       70,
       117,
       79,
@@ -1837,15 +2847,25 @@ export const priceIndexData = [
     ],
     "quarterChange": 36,
     "annualChange": 13,
+    "quarterChangeByPeriod": {
+      "jun2026": 36,
+      "mar2026": -27
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 13,
+      "mar2026": -50
+    },
     "jun2025": 70,
     "sep2025": 117,
     "dec2025": 79,
     "mar2026": 58,
-    "jun2026": 78
+    "jun2026": 78,
+    "mar2025": 115
   },
   {
     "produce": "Dried coconut",
     "values": [
+      278,
       137,
       209,
       180,
@@ -1854,15 +2874,25 @@ export const priceIndexData = [
     ],
     "quarterChange": 61,
     "annualChange": 75,
+    "quarterChangeByPeriod": {
+      "jun2026": 61,
+      "mar2026": -17
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 75,
+      "mar2026": -46
+    },
     "jun2025": 137,
     "sep2025": 209,
     "dec2025": 180,
     "mar2026": 149,
-    "jun2026": 240
+    "jun2026": 240,
+    "mar2025": 278
   },
   {
     "produce": "FRUITS",
     "values": [
+      131,
       162,
       147,
       154,
@@ -1871,16 +2901,26 @@ export const priceIndexData = [
     ],
     "quarterChange": 11,
     "annualChange": 23,
+    "quarterChangeByPeriod": {
+      "jun2026": 11,
+      "mar2026": 16
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 23,
+      "mar2026": 36
+    },
     "group": true,
     "jun2025": 162,
     "sep2025": 147,
     "dec2025": 154,
     "mar2026": 179,
-    "jun2026": 198
+    "jun2026": 198,
+    "mar2025": 131
   },
   {
     "produce": "Banana, Ripe",
     "values": [
+      119,
       145,
       142,
       101,
@@ -1889,15 +2929,25 @@ export const priceIndexData = [
     ],
     "quarterChange": 226,
     "annualChange": 43,
+    "quarterChangeByPeriod": {
+      "jun2026": 226,
+      "mar2026": -37
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 43,
+      "mar2026": -47
+    },
     "jun2025": 145,
     "sep2025": 142,
     "dec2025": 101,
     "mar2026": 63,
-    "jun2026": 207
+    "jun2026": 207,
+    "mar2025": 119
   },
   {
     "produce": "Pawpaw",
     "values": [
+      144,
       130,
       136,
       149,
@@ -1906,15 +2956,25 @@ export const priceIndexData = [
     ],
     "quarterChange": 37,
     "annualChange": 5,
+    "quarterChangeByPeriod": {
+      "jun2026": 37,
+      "mar2026": -33
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 5,
+      "mar2026": -31
+    },
     "jun2025": 130,
     "sep2025": 136,
     "dec2025": 149,
     "mar2026": 100,
-    "jun2026": 137
+    "jun2026": 137,
+    "mar2025": 144
   },
   {
     "produce": "Water Melon",
     "values": [
+      146,
       163,
       137,
       177,
@@ -1923,15 +2983,25 @@ export const priceIndexData = [
     ],
     "quarterChange": -24,
     "annualChange": 46,
+    "quarterChangeByPeriod": {
+      "jun2026": -24,
+      "mar2026": 77
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 46,
+      "mar2026": 114
+    },
     "jun2025": 163,
     "sep2025": 137,
     "dec2025": 177,
     "mar2026": 313,
-    "jun2026": 238
+    "jun2026": 238,
+    "mar2025": 146
   },
   {
     "produce": "Green coconut",
     "values": [
+      115,
       195,
       171,
       176,
@@ -1940,15 +3010,25 @@ export const priceIndexData = [
     ],
     "quarterChange": 13,
     "annualChange": -12,
+    "quarterChangeByPeriod": {
+      "jun2026": 13,
+      "mar2026": -14
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -12,
+      "mar2026": 32
+    },
     "jun2025": 195,
     "sep2025": 171,
     "dec2025": 176,
     "mar2026": 152,
-    "jun2026": 172
+    "jun2026": 172,
+    "mar2025": 115
   },
   {
     "produce": "VEGETABLE PRODUCE",
     "values": [
+      141,
       148,
       132,
       141,
@@ -1957,16 +3037,26 @@ export const priceIndexData = [
     ],
     "quarterChange": -19,
     "annualChange": -18,
+    "quarterChangeByPeriod": {
+      "jun2026": -19,
+      "mar2026": 5
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -18,
+      "mar2026": 6
+    },
     "group": true,
     "jun2025": 148,
     "sep2025": 132,
     "dec2025": 141,
     "mar2026": 149,
-    "jun2026": 120
+    "jun2026": 120,
+    "mar2025": 141
   },
   {
     "produce": "Bowl Cabbage (white)",
     "values": [
+      0,
       108,
       81,
       152,
@@ -1975,15 +3065,25 @@ export const priceIndexData = [
     ],
     "quarterChange": -21,
     "annualChange": 58,
+    "quarterChangeByPeriod": {
+      "jun2026": -21,
+      "mar2026": 43
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 58,
+      "mar2026": 100
+    },
     "jun2025": 108,
     "sep2025": 81,
     "dec2025": 152,
     "mar2026": 217,
-    "jun2026": 171
+    "jun2026": 171,
+    "mar2025": 0
   },
   {
     "produce": "Bowl Cabbage (purple)",
     "values": [
+      0,
       0,
       161,
       194,
@@ -1992,15 +3092,25 @@ export const priceIndexData = [
     ],
     "quarterChange": 0,
     "annualChange": 0,
+    "quarterChangeByPeriod": {
+      "jun2026": 0,
+      "mar2026": -100
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 0,
+      "mar2026": -100
+    },
     "jun2025": 0,
     "sep2025": 161,
     "dec2025": 194,
     "mar2026": 0,
-    "jun2026": 0
+    "jun2026": 0,
+    "mar2025": 0
   },
   {
     "produce": "Carrot",
     "values": [
+      0,
       294,
       293,
       191,
@@ -2009,15 +3119,25 @@ export const priceIndexData = [
     ],
     "quarterChange": -54,
     "annualChange": -32,
+    "quarterChangeByPeriod": {
+      "jun2026": -54,
+      "mar2026": 128
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -32,
+      "mar2026": 100
+    },
     "jun2025": 294,
     "sep2025": 293,
     "dec2025": 191,
     "mar2026": 435,
-    "jun2026": 199
+    "jun2026": 199,
+    "mar2025": 0
   },
   {
     "produce": "Chinese Cabbage",
     "values": [
+      795,
       285,
       160,
       182,
@@ -2026,15 +3146,25 @@ export const priceIndexData = [
     ],
     "quarterChange": -38,
     "annualChange": 11,
+    "quarterChangeByPeriod": {
+      "jun2026": -38,
+      "mar2026": 183
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 11,
+      "mar2026": -35
+    },
     "jun2025": 285,
     "sep2025": 160,
     "dec2025": 182,
     "mar2026": 515,
-    "jun2026": 318
+    "jun2026": 318,
+    "mar2025": 795
   },
   {
     "produce": "Cucumber",
     "values": [
+      425,
       157,
       144,
       228,
@@ -2043,15 +3173,25 @@ export const priceIndexData = [
     ],
     "quarterChange": -12,
     "annualChange": 16,
+    "quarterChangeByPeriod": {
+      "jun2026": -12,
+      "mar2026": -9
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 16,
+      "mar2026": -51
+    },
     "jun2025": 157,
     "sep2025": 144,
     "dec2025": 228,
     "mar2026": 208,
-    "jun2026": 183
+    "jun2026": 183,
+    "mar2025": 425
   },
   {
     "produce": "Pumpkin",
     "values": [
+      356,
       81,
       143,
       157,
@@ -2060,15 +3200,25 @@ export const priceIndexData = [
     ],
     "quarterChange": 90,
     "annualChange": 94,
+    "quarterChangeByPeriod": {
+      "jun2026": 90,
+      "mar2026": -48
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 94,
+      "mar2026": -77
+    },
     "jun2025": 81,
     "sep2025": 143,
     "dec2025": 157,
     "mar2026": 82,
-    "jun2026": 156
+    "jun2026": 156,
+    "mar2025": 356
   },
   {
     "produce": "Island Cabbage",
     "values": [
+      255,
       84,
       102,
       105,
@@ -2077,15 +3227,25 @@ export const priceIndexData = [
     ],
     "quarterChange": 89,
     "annualChange": 64,
+    "quarterChangeByPeriod": {
+      "jun2026": 89,
+      "mar2026": -30
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 64,
+      "mar2026": -71
+    },
     "jun2025": 84,
     "sep2025": 102,
     "dec2025": 105,
     "mar2026": 73,
-    "jun2026": 138
+    "jun2026": 138,
+    "mar2025": 255
   },
   {
     "produce": "Lettuce",
     "values": [
+      0,
       100,
       80,
       78,
@@ -2094,15 +3254,25 @@ export const priceIndexData = [
     ],
     "quarterChange": 100,
     "annualChange": -57,
+    "quarterChangeByPeriod": {
+      "jun2026": 100,
+      "mar2026": -100
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -57,
+      "mar2026": -100
+    },
     "jun2025": 100,
     "sep2025": 80,
     "dec2025": 78,
     "mar2026": 0,
-    "jun2026": 43
+    "jun2026": 43,
+    "mar2025": 0
   },
   {
     "produce": "Tomato",
     "values": [
+      0,
       289,
       144,
       124,
@@ -2111,15 +3281,25 @@ export const priceIndexData = [
     ],
     "quarterChange": -47,
     "annualChange": -65,
+    "quarterChangeByPeriod": {
+      "jun2026": -47,
+      "mar2026": 51
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -65,
+      "mar2026": 100
+    },
     "jun2025": 289,
     "sep2025": 144,
     "dec2025": 124,
     "mar2026": 187,
-    "jun2026": 100
+    "jun2026": 100,
+    "mar2025": 0
   },
   {
     "produce": "",
     "values": [
+      207,
       160,
       146,
       149,
@@ -2128,11 +3308,20 @@ export const priceIndexData = [
     ],
     "quarterChange": -7,
     "annualChange": 9,
+    "quarterChangeByPeriod": {
+      "jun2026": -7,
+      "mar2026": 27
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 9,
+      "mar2026": -9
+    },
     "jun2025": 160,
     "sep2025": 146,
     "dec2025": 149,
     "mar2026": 188,
-    "jun2026": 174
+    "jun2026": 174,
+    "mar2025": 207
   }
 ]
 
@@ -2140,6 +3329,7 @@ export const sellersData = [
   {
     "produce": "STAPLE PRODUCE",
     "values": [
+      36,
       67,
       63,
       94,
@@ -2148,16 +3338,26 @@ export const sellersData = [
     ],
     "quarterChange": -32,
     "annualChange": -17,
+    "quarterChangeByPeriod": {
+      "jun2026": -32,
+      "mar2026": -13
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -17,
+      "mar2026": 129
+    },
     "group": true,
     "jun2025": 67,
     "sep2025": 63,
     "dec2025": 94,
     "mar2026": 82,
-    "jun2026": 56
+    "jun2026": 56,
+    "mar2025": 36
   },
   {
     "produce": "Fiji Taro",
     "values": [
+      5,
       5,
       6,
       9,
@@ -2166,15 +3366,25 @@ export const sellersData = [
     ],
     "quarterChange": 0,
     "annualChange": -9,
+    "quarterChangeByPeriod": {
+      "jun2026": 0,
+      "mar2026": -46
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -9,
+      "mar2026": 0
+    },
     "jun2025": 5,
     "sep2025": 6,
     "dec2025": 9,
     "mar2026": 5,
-    "jun2026": 5
+    "jun2026": 5,
+    "mar2025": 5
   },
   {
     "produce": "Island Taro",
     "values": [
+      6,
       10,
       10,
       7,
@@ -2183,15 +3393,25 @@ export const sellersData = [
     ],
     "quarterChange": 73,
     "annualChange": 5,
+    "quarterChangeByPeriod": {
+      "jun2026": 73,
+      "mar2026": -16
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 5,
+      "mar2026": 6
+    },
     "jun2025": 10,
     "sep2025": 10,
     "dec2025": 7,
     "mar2026": 6,
-    "jun2026": 11
+    "jun2026": 11,
+    "mar2025": 6
   },
   {
     "produce": "Manioc",
     "values": [
+      5,
       14,
       10,
       13,
@@ -2200,15 +3420,25 @@ export const sellersData = [
     ],
     "quarterChange": -16,
     "annualChange": -40,
+    "quarterChangeByPeriod": {
+      "jun2026": -16,
+      "mar2026": -24
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -40,
+      "mar2026": 93
+    },
     "jun2025": 14,
     "sep2025": 10,
     "dec2025": 13,
     "mar2026": 10,
-    "jun2026": 8
+    "jun2026": 8,
+    "mar2025": 5
   },
   {
     "produce": "Sweet Potato (Kumala)",
     "values": [
+      5,
       5,
       6,
       17,
@@ -2217,15 +3447,25 @@ export const sellersData = [
     ],
     "quarterChange": -80,
     "annualChange": -42,
+    "quarterChangeByPeriod": {
+      "jun2026": -80,
+      "mar2026": -9
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -42,
+      "mar2026": 221
+    },
     "jun2025": 5,
     "sep2025": 6,
     "dec2025": 17,
     "mar2026": 15,
-    "jun2026": 3
+    "jun2026": 3,
+    "mar2025": 5
   },
   {
     "produce": "Yam",
     "values": [
+      1,
       8,
       7,
       6,
@@ -2234,15 +3474,25 @@ export const sellersData = [
     ],
     "quarterChange": 200,
     "annualChange": 13,
+    "quarterChangeByPeriod": {
+      "jun2026": 200,
+      "mar2026": -51
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 13,
+      "mar2026": 143
+    },
     "jun2025": 8,
     "sep2025": 7,
     "dec2025": 6,
     "mar2026": 3,
-    "jun2026": 9
+    "jun2026": 9,
+    "mar2025": 1
   },
   {
     "produce": "Banana - green",
     "values": [
+      7,
       16,
       15,
       29,
@@ -2251,15 +3501,25 @@ export const sellersData = [
     ],
     "quarterChange": -57,
     "annualChange": -30,
+    "quarterChangeByPeriod": {
+      "jun2026": -57,
+      "mar2026": -12
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -30,
+      "mar2026": 268
+    },
     "jun2025": 16,
     "sep2025": 15,
     "dec2025": 29,
     "mar2026": 25,
-    "jun2026": 11
+    "jun2026": 11,
+    "mar2025": 7
   },
   {
     "produce": "Dried coconut",
     "values": [
+      7,
       10,
       9,
       14,
@@ -2268,15 +3528,25 @@ export const sellersData = [
     ],
     "quarterChange": -46,
     "annualChange": 0,
+    "quarterChangeByPeriod": {
+      "jun2026": -46,
+      "mar2026": 30
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 0,
+      "mar2026": 143
+    },
     "jun2025": 10,
     "sep2025": 9,
     "dec2025": 14,
     "mar2026": 18,
-    "jun2026": 10
+    "jun2026": 10,
+    "mar2025": 7
   },
   {
     "produce": "FRUITS",
     "values": [
+      23,
       38,
       48,
       83,
@@ -2285,16 +3555,26 @@ export const sellersData = [
     ],
     "quarterChange": -15,
     "annualChange": 41,
+    "quarterChangeByPeriod": {
+      "jun2026": -15,
+      "mar2026": -23
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 41,
+      "mar2026": 174
+    },
     "group": true,
     "jun2025": 38,
     "sep2025": 48,
     "dec2025": 83,
     "mar2026": 64,
-    "jun2026": 54
+    "jun2026": 54,
+    "mar2025": 23
   },
   {
     "produce": "Banana, Ripe",
     "values": [
+      5,
       16,
       21,
       35,
@@ -2303,15 +3583,25 @@ export const sellersData = [
     ],
     "quarterChange": -48,
     "annualChange": 3,
+    "quarterChangeByPeriod": {
+      "jun2026": -48,
+      "mar2026": -7
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 3,
+      "mar2026": 500
+    },
     "jun2025": 16,
     "sep2025": 21,
     "dec2025": 35,
     "mar2026": 32,
-    "jun2026": 17
+    "jun2026": 17,
+    "mar2025": 5
   },
   {
     "produce": "Pawpaw",
     "values": [
+      8,
       20,
       21,
       37,
@@ -2320,15 +3610,25 @@ export const sellersData = [
     ],
     "quarterChange": -10,
     "annualChange": 0,
+    "quarterChangeByPeriod": {
+      "jun2026": -10,
+      "mar2026": -41
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 0,
+      "mar2026": 167
+    },
     "jun2025": 20,
     "sep2025": 21,
     "dec2025": 37,
     "mar2026": 22,
-    "jun2026": 20
+    "jun2026": 20,
+    "mar2025": 8
   },
   {
     "produce": "Water Melon",
     "values": [
+      2,
       0,
       1,
       3,
@@ -2337,15 +3637,25 @@ export const sellersData = [
     ],
     "quarterChange": -56,
     "annualChange": 300,
+    "quarterChangeByPeriod": {
+      "jun2026": -56,
+      "mar2026": -50
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 300,
+      "mar2026": -31
+    },
     "jun2025": 0,
     "sep2025": 1,
     "dec2025": 3,
     "mar2026": 2,
-    "jun2026": 1
+    "jun2026": 1,
+    "mar2025": 2
   },
   {
     "produce": "Green coconut",
     "values": [
+      8,
       2,
       5,
       8,
@@ -2354,15 +3664,25 @@ export const sellersData = [
     ],
     "quarterChange": 110,
     "annualChange": 636,
+    "quarterChangeByPeriod": {
+      "jun2026": 110,
+      "mar2026": -2
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 636,
+      "mar2026": 9
+    },
     "jun2025": 2,
     "sep2025": 5,
     "dec2025": 8,
     "mar2026": 8,
-    "jun2026": 17
+    "jun2026": 17,
+    "mar2025": 8
   },
   {
     "produce": "VEGETABLE PRODUCE",
     "values": [
+      28,
       38,
       77,
       95,
@@ -2371,16 +3691,26 @@ export const sellersData = [
     ],
     "quarterChange": 17,
     "annualChange": 16,
+    "quarterChangeByPeriod": {
+      "jun2026": 17,
+      "mar2026": -60
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 16,
+      "mar2026": 35
+    },
     "group": true,
     "jun2025": 38,
     "sep2025": 77,
     "dec2025": 95,
     "mar2026": 38,
-    "jun2026": 45
+    "jun2026": 45,
+    "mar2025": 28
   },
   {
     "produce": "Bowl Cabbage (white)",
     "values": [
+      0,
       2,
       7,
       5,
@@ -2389,15 +3719,25 @@ export const sellersData = [
     ],
     "quarterChange": 700,
     "annualChange": -20,
+    "quarterChangeByPeriod": {
+      "jun2026": 700,
+      "mar2026": -97
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -20,
+      "mar2026": -100
+    },
     "jun2025": 2,
     "sep2025": 7,
     "dec2025": 5,
     "mar2026": 0,
-    "jun2026": 1
+    "jun2026": 1,
+    "mar2025": 0
   },
   {
     "produce": "Bowl Cabbage (purple)",
     "values": [
+      0,
       0,
       2,
       3,
@@ -2406,15 +3746,25 @@ export const sellersData = [
     ],
     "quarterChange": 0,
     "annualChange": 0,
+    "quarterChangeByPeriod": {
+      "jun2026": 0,
+      "mar2026": -100
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 0,
+      "mar2026": -100
+    },
     "jun2025": 0,
     "sep2025": 2,
     "dec2025": 3,
     "mar2026": 0,
-    "jun2026": 0
+    "jun2026": 0,
+    "mar2025": 0
   },
   {
     "produce": "Carrot",
     "values": [
+      0,
       0,
       1,
       3,
@@ -2423,15 +3773,25 @@ export const sellersData = [
     ],
     "quarterChange": 250,
     "annualChange": 250,
+    "quarterChangeByPeriod": {
+      "jun2026": 250,
+      "mar2026": -87
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 250,
+      "mar2026": -100
+    },
     "jun2025": 0,
     "sep2025": 1,
     "dec2025": 3,
     "mar2026": 0,
-    "jun2026": 1
+    "jun2026": 1,
+    "mar2025": 0
   },
   {
     "produce": "Chinese Cabbage",
     "values": [
+      2,
       4,
       9,
       6,
@@ -2440,15 +3800,25 @@ export const sellersData = [
     ],
     "quarterChange": 95,
     "annualChange": 78,
+    "quarterChangeByPeriod": {
+      "jun2026": 95,
+      "mar2026": -42
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 78,
+      "mar2026": 91
+    },
     "jun2025": 4,
     "sep2025": 9,
     "dec2025": 6,
     "mar2026": 4,
-    "jun2026": 7
+    "jun2026": 7,
+    "mar2025": 2
   },
   {
     "produce": "Cucumber",
     "values": [
+      9,
       10,
       12,
       14,
@@ -2457,15 +3827,25 @@ export const sellersData = [
     ],
     "quarterChange": 191,
     "annualChange": 14,
+    "quarterChangeByPeriod": {
+      "jun2026": 191,
+      "mar2026": -73
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 14,
+      "mar2026": -56
+    },
     "jun2025": 10,
     "sep2025": 12,
     "dec2025": 14,
     "mar2026": 4,
-    "jun2026": 11
+    "jun2026": 11,
+    "mar2025": 9
   },
   {
     "produce": "Pumpkin",
     "values": [
+      9,
       3,
       9,
       6,
@@ -2474,15 +3854,25 @@ export const sellersData = [
     ],
     "quarterChange": 400,
     "annualChange": 5,
+    "quarterChangeByPeriod": {
+      "jun2026": 400,
+      "mar2026": -89
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 5,
+      "mar2026": -93
+    },
     "jun2025": 3,
     "sep2025": 9,
     "dec2025": 6,
     "mar2026": 1,
-    "jun2026": 3
+    "jun2026": 3,
+    "mar2025": 9
   },
   {
     "produce": "Island Cabbage",
     "values": [
+      9,
       16,
       15,
       27,
@@ -2491,15 +3881,25 @@ export const sellersData = [
     ],
     "quarterChange": -38,
     "annualChange": -1,
+    "quarterChangeByPeriod": {
+      "jun2026": -38,
+      "mar2026": -10
+    },
+    "annualChangeByPeriod": {
+      "jun2026": -1,
+      "mar2026": 179
+    },
     "jun2025": 16,
     "sep2025": 15,
     "dec2025": 27,
     "mar2026": 25,
-    "jun2026": 15
+    "jun2026": 15,
+    "mar2025": 9
   },
   {
     "produce": "Lettuce",
     "values": [
+      0,
       1,
       6,
       4,
@@ -2508,15 +3908,25 @@ export const sellersData = [
     ],
     "quarterChange": 100,
     "annualChange": 33,
+    "quarterChangeByPeriod": {
+      "jun2026": 100,
+      "mar2026": -100
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 33,
+      "mar2026": -100
+    },
     "jun2025": 1,
     "sep2025": 6,
     "dec2025": 4,
     "mar2026": 0,
-    "jun2026": 1
+    "jun2026": 1,
+    "mar2025": 0
   },
   {
     "produce": "Tomato",
     "values": [
+      0,
       3,
       17,
       27,
@@ -2525,15 +3935,25 @@ export const sellersData = [
     ],
     "quarterChange": -20,
     "annualChange": 33,
+    "quarterChangeByPeriod": {
+      "jun2026": -20,
+      "mar2026": -81
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 33,
+      "mar2026": 100
+    },
     "jun2025": 3,
     "sep2025": 17,
     "dec2025": 27,
     "mar2026": 5,
-    "jun2026": 4
+    "jun2026": 4,
+    "mar2025": 0
   },
   {
     "produce": "",
     "values": [
+      87,
       144,
       188,
       271,
@@ -2542,10 +3962,19 @@ export const sellersData = [
     ],
     "quarterChange": -16,
     "annualChange": 8,
+    "quarterChangeByPeriod": {
+      "jun2026": -16,
+      "mar2026": -32
+    },
+    "annualChangeByPeriod": {
+      "jun2026": 8,
+      "mar2026": 110
+    },
     "jun2025": 144,
     "sep2025": 188,
     "dec2025": 271,
     "mar2026": 183,
-    "jun2026": 154
+    "jun2026": 154,
+    "mar2025": 87
   }
 ]

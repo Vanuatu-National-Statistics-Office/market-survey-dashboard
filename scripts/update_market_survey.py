@@ -122,7 +122,35 @@ def find_table_sheet(workbook, table_number: int):
 def read_table(workbook, table_number: int):
     ws, title_row = find_table_sheet(workbook, table_number)
 
-    header_row = title_row + 1
+        # Find the actual PRODUCE header.
+    # The Market Survey workbooks do not always use the same starting
+    # column. For example, March 2026 uses column A while June 2026
+    # uses column B.
+
+    header_row = None
+    produce_col = None
+
+    for candidate_row in range(
+        title_row + 1,
+        min(title_row + 6, ws.max_row + 1),
+    ):
+        for col in range(1, ws.max_column + 1):
+            cell_text = clean_text(
+                ws.cell(candidate_row, col).value
+            ).upper()
+
+            if cell_text == "PRODUCE":
+                header_row = candidate_row
+                produce_col = col
+                break
+
+        if header_row is not None:
+            break
+
+    if header_row is None or produce_col is None:
+        raise RuntimeError(
+            f"Could not locate PRODUCE header for Table {table_number}."
+        )
 
     headers = {}
     period_columns = []
@@ -137,29 +165,34 @@ def read_table(workbook, table_number: int):
         headers[col] = text
 
         period = parse_period(value)
+
         if period:
             period_columns.append((col, period))
 
-    produce_col = None
     quarter_change_col = None
     annual_change_col = None
 
     for col, text in headers.items():
-        normalized = text.upper().replace("\n", " ")
+        normalized = (
+            text.upper()
+            .replace("\n", " ")
+            .replace("\r", " ")
+        )
 
-        if "PRODUCE" == normalized.strip():
-            produce_col = col
+        normalized = " ".join(normalized.split())
 
         if "PREV QTR" in normalized:
             quarter_change_col = col
 
-        if "% CHNG FROM" in normalized and "PREV QTR" not in normalized:
+        elif "% CHNG FROM" in normalized:
             annual_change_col = col
 
-    if produce_col is None:
-        raise RuntimeError(
-            f"Could not locate PRODUCE column for Table {table_number}."
-        )
+    print(
+        f"TABLE {table_number}: "
+        f"sheet={ws.title!r}, "
+        f"header_row={header_row}, "
+        f"produce_col={produce_col}"
+    )
 
     if not period_columns:
         raise RuntimeError(
@@ -213,7 +246,20 @@ def read_table(workbook, table_number: int):
             "values": values,
             "quarterChange": quarter_change,
             "annualChange": annual_change,
+            "quarterChangeByPeriod": {},
+            "annualChangeByPeriod": {},
         }
+
+        if period_columns:
+            latest_period_key = period_columns[-1][1]["key"]
+
+            record["quarterChangeByPeriod"][latest_period_key] = (
+                quarter_change
+            )
+
+            record["annualChangeByPeriod"][latest_period_key] = (
+                annual_change
+            )
 
         upper_produce = produce.upper()
 
@@ -221,8 +267,6 @@ def read_table(workbook, table_number: int):
             record["group"] = True
 
         # Keep period-name properties too.
-        # This means the current dashboard continues working
-        # while we gradually convert it to fully dynamic periods.
         for index, (_col, period) in enumerate(period_columns):
             record[period["key"]] = values[index]
 
@@ -314,7 +358,143 @@ def select_latest_workbook(source_dir: Path):
     )
 
     return ranked[-1][1]
+def merge_historical_periods(
+    source_dir: Path,
+    latest_workbook_path: Path,
+    tables,
+):
+    """
+    Add missing historical quarterly periods from older Market Survey
+    workbooks while keeping the latest workbook as the main release.
+    """
 
+    historical_workbooks = [
+        path
+        for path in source_dir.glob("*.xlsx")
+        if not path.name.startswith("~$")
+        and path.resolve() != latest_workbook_path.resolve()
+    ]
+
+    for historical_path in historical_workbooks:
+        workbook = load_workbook(
+            historical_path,
+            data_only=True,
+            read_only=True,
+        )
+
+        try:
+            for table_number in range(1, 7):
+                historical_table = read_table(
+                    workbook,
+                    table_number,
+                )
+
+                target_table = tables[table_number]
+
+                existing_period_keys = {
+                    period["key"]
+                    for period in target_table["periods"]
+                }
+
+                # Named produce rows only.
+                historical_rows = {
+                    clean_text(row["produce"]).upper(): row
+                    for row in historical_table["rows"]
+                    if clean_text(row["produce"])
+                }
+
+                # Overall total rows must be handled separately because
+                # their produce label is blank.
+                historical_total = get_total_row(historical_table)
+                target_total = get_total_row(target_table)
+
+                # Merge official quarter-change and annual-change values.
+                for target_row in target_table["rows"]:
+                    row_key = clean_text(
+                        target_row["produce"]
+                    ).upper()
+
+                    if row_key:
+                        historical_row = historical_rows.get(row_key)
+                    elif target_row is target_total:
+                        historical_row = historical_total
+                    else:
+                        historical_row = None
+
+                    if not historical_row:
+                        continue
+
+                    target_row.setdefault(
+                        "quarterChangeByPeriod",
+                        {},
+                    ).update(
+                        historical_row.get(
+                            "quarterChangeByPeriod",
+                            {},
+                        )
+                    )
+
+                    target_row.setdefault(
+                        "annualChangeByPeriod",
+                        {},
+                    ).update(
+                        historical_row.get(
+                            "annualChangeByPeriod",
+                            {},
+                        )
+                    )
+
+                # Merge missing historical period values.
+                for period_index, period in enumerate(
+                    historical_table["periods"]
+                ):
+                    period_key = period["key"]
+
+                    if period_key in existing_period_keys:
+                        continue
+
+                    target_table["periods"].append(period)
+
+                    for target_row in target_table["rows"]:
+                        row_key = clean_text(
+                            target_row["produce"]
+                        ).upper()
+
+                        if row_key:
+                            historical_row = historical_rows.get(row_key)
+                        elif target_row is target_total:
+                            historical_row = historical_total
+                        else:
+                            historical_row = None
+
+                        target_row[period_key] = (
+                            historical_row["values"][period_index]
+                            if historical_row
+                            else None
+                        )
+
+        finally:
+            workbook.close()
+
+    # Put all quarterly periods back into chronological order.
+    for table_number in range(1, 7):
+        table = tables[table_number]
+
+        table["periods"].sort(
+            key=lambda period: (
+                period["year"],
+                period["monthNumber"],
+            )
+        )
+
+        for row in table["rows"]:
+            for period in table["periods"]:
+                row.setdefault(period["key"], None)
+
+            row["values"] = [
+                row[period["key"]]
+                for period in table["periods"]
+            ]
 
 def find_report(
     reports_dir: Path,
@@ -405,6 +585,16 @@ def build_dashboard_data(
             number: read_table(workbook, number)
             for number in range(1, 7)
         }
+
+        merge_historical_periods(
+    Path("source-data/2026"),
+    workbook_path,
+    tables,
+)
+        print(
+    "TABLE 3 PRODUCES:",
+    [row["produce"] for row in tables[3]["rows"]]
+)
 
         periods = tables[4]["periods"]
 

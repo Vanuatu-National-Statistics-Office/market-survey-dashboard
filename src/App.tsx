@@ -51,6 +51,47 @@ function App() {
     | 'methodology'
   >('overview')
 const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+const [selectedQuarter, setSelectedQuarter] =
+  useState<'mar2026' | 'jun2026'>('jun2026')
+const quarterConfig = {
+  mar2026: {
+    label: 'March Quarter 2026',
+    shortLabel: 'March Quarter',
+    releaseDate: '15 June 2026',
+    reportUrl: `${import.meta.env.BASE_URL}reports/MS_MAR_26.pdf`,
+    excelUrl: `${import.meta.env.BASE_URL}downloads/market-survey-march-2026.xlsx`,
+    summary: {
+      volumeIndex: 74,
+      volumeChange: -37,
+      priceIndex: 188,
+      priceChange: 27,
+      totalValue: 897,
+      totalValueChange: -37,
+      sellers: 183,
+      sellersChange: -32,
+    },
+  },
+
+  jun2026: {
+    label: 'June Quarter 2026',
+    shortLabel: 'June Quarter',
+    releaseDate: '02 November 2026',
+    reportUrl: `${import.meta.env.BASE_URL}reports/MS_JUN_26.pdf`,
+    excelUrl: `${import.meta.env.BASE_URL}downloads/market-survey-june-2026.xlsx`,
+    summary: {
+      volumeIndex: 86,
+      volumeChange: 17,
+      priceIndex: 174,
+      priceChange: -7,
+      totalValue: 1169,
+      totalValueChange: 30,
+      sellers: 154,
+      sellersChange: -16,
+    },
+  },
+} as const
+
+const currentQuarter = quarterConfig[selectedQuarter]
 const selectedGroupName =
   selectedCommodity === 'staple'
     ? 'STAPLE PRODUCE'
@@ -68,7 +109,7 @@ const selectedCommodityLabel =
       : selectedCommodity === 'fruits'
         ? 'Fruits'
         : 'Vegetables'
-        const overviewGroupData = [
+  const overviewGroupData = [
   {
     name: 'Staple Produce',
     key: 'STAPLE PRODUCE',
@@ -83,16 +124,33 @@ const selectedCommodityLabel =
   },
 ].map((group) => ({
   name: group.name,
+
   volume:
-    volumeIndexData.find((item) => item.produce === group.key)?.jun2026 ?? 0,
+    volumeIndexData.find((item) => item.produce === group.key)?.[
+      selectedQuarter
+    ] ?? 0,
+
   price:
-    priceIndexData.find((item) => item.produce === group.key)?.jun2026 ?? 0,
+    priceIndexData.find((item) => item.produce === group.key)?.[
+      selectedQuarter
+    ] ?? 0,
+
   value:
-    valueOfSupplies.find((item) => item.produce === group.key)?.jun2026 ?? 0,
+    valueOfSupplies.find((item) => item.produce === group.key)?.[
+      selectedQuarter
+    ] ?? 0,
+
   sellers:
-    sellersData.find((item) => item.produce === group.key)?.jun2026 ?? 0,
+    sellersData.find((item) => item.produce === group.key)?.[
+      selectedQuarter
+    ] ?? 0,
 }))
 
+const largestValueContributor = overviewGroupData.reduce(
+  (largest, group) =>
+    group.value > largest.value ? group : largest,
+  overviewGroupData[0]
+)
 const selectedVolumeRow = selectedGroupName
   ? volumeIndexData.find((item) => item.produce === selectedGroupName)
   : null
@@ -109,26 +167,62 @@ const selectedSellersRow = selectedGroupName
   ? sellersData.find((item) => item.produce === selectedGroupName)
   : null
 
-const currentVolumeIndex =
-  selectedVolumeRow?.jun2026 ?? marketSurveyData.summary.volumeIndex
+const calculateQuarterChange = (
+  row:
+    | {
+        dec2025: number
+        mar2026: number
+        quarterChange: number
+      }
+    | null
+    | undefined
+) => {
+  if (!row) return 0
 
-const currentVolumeChange =
-  selectedVolumeRow?.quarterChange ?? marketSurveyData.summary.volumeChange
+  if (selectedQuarter === 'jun2026') {
+    return row.quarterChange
+  }
 
-const currentPriceIndex =
-  selectedPriceRow?.jun2026 ?? marketSurveyData.summary.priceIndex
+  if (row.dec2025 === 0) {
+    return row.mar2026 === 0 ? 0 : 100
+  }
 
-const currentPriceChange =
-  selectedPriceRow?.quarterChange ?? marketSurveyData.summary.priceChange
-const currentTotalValue =
-  selectedValueRow?.jun2026 ?? marketSurveyData.summary.totalValue
+  return Math.round(
+    ((row.mar2026 - row.dec2025) / row.dec2025) * 100
+  )
+}
 
-const currentTotalValueChange =
-  selectedValueRow?.quarterChange ?? marketSurveyData.summary.totalValueChange
-const currentSellers =
-  selectedSellersRow?.jun2026 ?? marketSurveyData.summary.sellers
-  const currentSellersChange =
-  selectedSellersRow?.quarterChange ?? marketSurveyData.summary.sellersChange
+const currentVolumeIndex = selectedVolumeRow
+  ? selectedVolumeRow[selectedQuarter]
+  : currentQuarter.summary.volumeIndex
+
+const currentVolumeChange = selectedVolumeRow
+  ? calculateQuarterChange(selectedVolumeRow)
+  : currentQuarter.summary.volumeChange
+
+const currentPriceIndex = selectedPriceRow
+  ? selectedPriceRow[selectedQuarter]
+  : currentQuarter.summary.priceIndex
+
+const currentPriceChange = selectedPriceRow
+  ? calculateQuarterChange(selectedPriceRow)
+  : currentQuarter.summary.priceChange
+
+const currentTotalValue = selectedValueRow
+  ? selectedValueRow[selectedQuarter]
+  : currentQuarter.summary.totalValue
+
+const currentTotalValueChange = selectedValueRow
+  ? calculateQuarterChange(selectedValueRow)
+  : currentQuarter.summary.totalValueChange
+
+const currentSellers = selectedSellersRow
+  ? selectedSellersRow[selectedQuarter]
+  : currentQuarter.summary.sellers
+
+const currentSellersChange = selectedSellersRow
+  ? calculateQuarterChange(selectedSellersRow)
+  : currentQuarter.summary.sellersChange
     const [activeTable, setActiveTable] =
   useState<
     'quantity' | 'price' | 'value' | 'volume' | 'priceIndex' | 'sellers'
@@ -236,14 +330,14 @@ const valueChartData = !selectedGroupName
             : item.produce === 'FRUITS'
               ? 'Fruits'
               : 'Vegetables',
-        y: item.jun2026,
+        y: item[selectedQuarter],
         color: sellerProductColors[item.produce] ?? '#27899a',
       }))
   : selectedValueRows
       .filter((item) => item.produce && !item.group)
       .map((item) => ({
         name: item.produce,
-        y: item.jun2026,
+        y: item[selectedQuarter],
         color: sellerProductColors[item.produce] ?? '#27899a',
       }))
 
@@ -269,11 +363,16 @@ const filteredTrendData = selectedGroupName
         volumeIndex: selectedVolumeRow?.mar2026 ?? 0,
         priceIndex: selectedPriceRow?.mar2026 ?? 0,
       },
-      {
-        period: 'Jun 2026',
-        volumeIndex: selectedVolumeRow?.jun2026 ?? 0,
-        priceIndex: selectedPriceRow?.jun2026 ?? 0,
-      },
+
+      ...(selectedQuarter === 'jun2026'
+        ? [
+            {
+              period: 'Jun 2026',
+              volumeIndex: selectedVolumeRow?.jun2026 ?? 0,
+              priceIndex: selectedPriceRow?.jun2026 ?? 0,
+            },
+          ]
+        : []),
     ]
   : marketSurveyData.trend
 
@@ -309,13 +408,13 @@ const sellerChartData = !selectedGroupName
             : item.produce === 'FRUITS'
               ? 'Fruits'
               : 'Vegetables',
-        y: item.jun2026,
+        y: item[selectedQuarter],
       }))
   : selectedSellerRows
       .filter((item) => item.produce && !item.group)
       .map((item) => ({
         name: item.produce,
-        y: item.jun2026,
+        y: item[selectedQuarter],
       }))
 
 const sortedSellerChartData = [...sellerChartData].sort(
@@ -617,7 +716,11 @@ const produceValueChartData = (
   selectedGroupName
     ? selectedValueRows.filter((item) => item.produce && !item.group)
     : valueOfSupplies.filter((item) => item.produce && !item.group)
-).sort((a, b) => b.jun2026 - a.jun2026)
+).sort(
+  (a, b) =>
+    (b[selectedQuarter] ?? 0) -
+    (a[selectedQuarter] ?? 0)
+)
 
 const produceValueOptions: Highcharts.Options = {
   chart: {
@@ -687,11 +790,11 @@ const produceValueOptions: Highcharts.Options = {
       type: 'bar',
       name: 'Share of value',
 
-      data: produceValueChartData.map((item) => ({
-  y: (item.jun2026 / currentTotalValue) * 100,
+    data: produceValueChartData.map((item) => ({
+  y: ((item[selectedQuarter] ?? 0) / currentTotalValue) * 100,
   color: sellerProductColors[item.produce] ?? '#27899a',
   custom: {
-    value: item.jun2026,
+    value: item[selectedQuarter] ?? 0,
   },
 })),
 
@@ -721,10 +824,10 @@ const produceValueOptions: Highcharts.Options = {
         </div>
 
         <div className="period-card">
-          <span>Reporting period</span>
-          <strong>June Quarter 2026</strong>
-          <small>Release Date: 02 November 2026</small>
-        </div>
+  <span>Reporting period</span>
+  <strong>{currentQuarter.label}</strong>
+  <small>Release Date: {currentQuarter.releaseDate}</small>
+</div>
       </header>
 
       <div className="vbos-strip">
@@ -853,11 +956,19 @@ const produceValueOptions: Highcharts.Options = {
   {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
 </button>
             <div className="filter-control">
-              <label>Quarter</label>
-              <select defaultValue="June">
-                <option value="June">June Quarter</option>
-              </select>
-            </div>
+  <label>Quarter</label>
+  <select
+    value={selectedQuarter}
+    onChange={(e) =>
+      setSelectedQuarter(
+        e.target.value as 'mar2026' | 'jun2026'
+      )
+    }
+  >
+    <option value="mar2026">March Quarter</option>
+    <option value="jun2026">June Quarter</option>
+  </select>
+</div>
 
             <div className="filter-control">
               <label>Year</label>
@@ -910,7 +1021,7 @@ const produceValueOptions: Highcharts.Options = {
 
               <a
   className="action-button primary"
-  href={marketSurveyData.reportUrl}
+  href={currentQuarter.reportUrl}
   target="_blank"
   rel="noreferrer"
 >
@@ -920,7 +1031,7 @@ const produceValueOptions: Highcharts.Options = {
 
               <a
   className="action-button success"
-  href={marketSurveyData.excelUrl}
+  href={currentQuarter.excelUrl}
   download
 >
   <Download size={17} />
@@ -1036,7 +1147,7 @@ const produceValueOptions: Highcharts.Options = {
     <div className="panel-heading">
       <div>
         <h2>Commodity Group Snapshot</h2>
-        <p>June Quarter 2026</p>
+        <p>{currentQuarter.label}</p>
       </div>
       <Layers3 size={22} />
     </div>
@@ -1072,7 +1183,7 @@ const produceValueOptions: Highcharts.Options = {
   <article className="panel overview-highlights">
   <div className="panel-heading">
     <div>
-      <h2>June Quarter Highlights</h2>
+      <h2>{currentQuarter.shortLabel} Highlights</h2>
       <p>Key market movements</p>
     </div>
     <BarChart3 size={22} />
@@ -1081,28 +1192,70 @@ const produceValueOptions: Highcharts.Options = {
   <div className="highlight-list">
     <div className="highlight-item">
       <span>Overall market volume</span>
-      <strong className="positive">▲ +17%</strong>
+      <strong
+        className={
+          currentQuarter.summary.volumeChange >= 0
+            ? 'positive'
+            : 'negative'
+        }
+      >
+        {currentQuarter.summary.volumeChange >= 0 ? '▲' : '▼'}{' '}
+        {currentQuarter.summary.volumeChange > 0 ? '+' : ''}
+        {currentQuarter.summary.volumeChange}%
+      </strong>
     </div>
 
     <div className="highlight-item">
       <span>Overall price index</span>
-      <strong className="negative">▼ -7%</strong>
+      <strong
+        className={
+          currentQuarter.summary.priceChange >= 0
+            ? 'positive'
+            : 'negative'
+        }
+      >
+        {currentQuarter.summary.priceChange >= 0 ? '▲' : '▼'}{' '}
+        {currentQuarter.summary.priceChange > 0 ? '+' : ''}
+        {currentQuarter.summary.priceChange}%
+      </strong>
     </div>
 
     <div className="highlight-item">
       <span>Total value of supplies</span>
-      <strong className="positive">▲ +30%</strong>
+      <strong
+        className={
+          currentQuarter.summary.totalValueChange >= 0
+            ? 'positive'
+            : 'negative'
+        }
+      >
+        {currentQuarter.summary.totalValueChange >= 0 ? '▲' : '▼'}{' '}
+        {currentQuarter.summary.totalValueChange > 0 ? '+' : ''}
+        {currentQuarter.summary.totalValueChange}%
+      </strong>
     </div>
 
     <div className="highlight-item">
       <span>Average number of sellers</span>
-      <strong className="negative">▼ -16%</strong>
+      <strong
+        className={
+          currentQuarter.summary.sellersChange >= 0
+            ? 'positive'
+            : 'negative'
+        }
+      >
+        {currentQuarter.summary.sellersChange >= 0 ? '▲' : '▼'}{' '}
+        {currentQuarter.summary.sellersChange > 0 ? '+' : ''}
+        {currentQuarter.summary.sellersChange}%
+      </strong>
     </div>
 
     <div className="highlight-feature">
       <span>Largest value contributor</span>
-      <strong>Staple Produce</strong>
-      <small>VT 802,000</small>
+      <strong>{largestValueContributor.name}</strong>
+      <small>
+        VT {Math.round(largestValueContributor.value * 1000).toLocaleString()}
+      </small>
     </div>
   </div>
 </article>
@@ -1111,7 +1264,9 @@ const produceValueOptions: Highcharts.Options = {
   <div className="panel-heading">
     <div>
       <h2>Quick Market Comparison</h2>
-      <p>Value of supplies by commodity group, June Quarter 2026</p>
+      <p>
+  Value of supplies by commodity group, {currentQuarter.label}
+</p>
     </div>
     <BarChart3 size={22} />
   </div>
@@ -1146,7 +1301,7 @@ const produceValueOptions: Highcharts.Options = {
                   </h2>
 
                   <p>
-                  June Quarter 2026 · Commodity Group Performance
+                  {currentQuarter.label} · Commodity Group Performance
                   </p>
                 </div>
                 <Layers3 size={22} />
@@ -1236,7 +1391,7 @@ const produceValueOptions: Highcharts.Options = {
       <div className="panel-heading">
         <div>
           <h2>Value by Individual Produce</h2>
-          <p>{selectedCommodityLabel} · June Quarter 2026</p>
+          <p>{selectedCommodityLabel} · {currentQuarter.label}</p>
         </div>
         <PackageSearch size={22} />
       </div>
@@ -1253,7 +1408,7 @@ const produceValueOptions: Highcharts.Options = {
       <div className="panel-heading">
         <div>
           <h2>Sellers by Individual Produce</h2>
-          <p>{selectedCommodityLabel} · June Quarter 2026</p>
+          <p>{selectedCommodityLabel} · {currentQuarter.label}</p>
         </div>
         <Users size={22} />
       </div>
@@ -1274,7 +1429,10 @@ const produceValueOptions: Highcharts.Options = {
     <div className="panel-heading">
       <div>
         <h2>Quarterly Volume and Price Trend</h2>
-        <p>{selectedCommodityLabel} · June 2025 – June 2026</p>
+        <p>
+  {selectedCommodityLabel} · June 2025 –{' '}
+  {selectedQuarter === 'mar2026' ? 'March 2026' : 'June 2026'}
+</p>
       </div>
 
       <BarChart3 size={22} />
@@ -1307,8 +1465,8 @@ const produceValueOptions: Highcharts.Options = {
 
 <p>
   {selectedCommodity === 'all'
-    ? 'June Quarter 2026 — percentage of total market value'
-    : `June Quarter 2026 — percentage of ${selectedCommodityLabel} value`}
+    ? `${currentQuarter.label} — percentage of total market value`
+    : `${currentQuarter.label} — percentage of ${selectedCommodityLabel} value`}
 </p>
     </div>
 
@@ -1338,7 +1496,10 @@ const produceValueOptions: Highcharts.Options = {
 </h2>
 
 <p>
-  June 2025 – June 2026 · Quarterly data by produce and commodity group
+  {selectedQuarter === 'mar2026'
+    ? 'March 2025 – March 2026'
+    : 'June 2025 – June 2026'}
+  {' '}· Quarterly data by produce and commodity group
 </p>
               </div>
               <Table2 size={22} />
@@ -1387,59 +1548,98 @@ const produceValueOptions: Highcharts.Options = {
             <div className="data-table-wrap">
   <table className="market-table">
     <thead>
-      <tr>
-        <th>Produce</th>
-        <th>Jun 2025</th>
-        <th>Sep 2025</th>
-        <th>Dec 2025</th>
-        <th>Mar 2026</th>
-        <th>Jun 2026</th>
-        <th>% Change Prev. Qtr</th>
-        <th>% Change Same Qtr LY</th>
-      </tr>
-    </thead>
+  <tr>
+    <th>Produce</th>
+
+    {selectedQuarter === 'mar2026' && (
+      <th>Mar 2025</th>
+    )}
+
+    <th>Jun 2025</th>
+    <th>Sep 2025</th>
+    <th>Dec 2025</th>
+    <th>Mar 2026</th>
+
+    {selectedQuarter === 'jun2026' && (
+      <th>Jun 2026</th>
+    )}
+
+    <th>% Change Prev. Qtr</th>
+    <th>% Change Same Qtr LY</th>
+  </tr>
+</thead>
 
     <tbody>
-      {filteredTableData.map((item) => (
-        <tr
-          key={item.produce}
-          className={item.group ? 'group-row' : ''}
+  {filteredTableData.map((item) => {
+    const quarterChange =
+      item.quarterChangeByPeriod?.[selectedQuarter] ??
+      item.quarterChange
+
+    const annualChange =
+      item.annualChangeByPeriod?.[selectedQuarter] ??
+      item.annualChange
+
+    return (
+      <tr
+        key={item.produce}
+        className={item.group ? 'group-row' : ''}
+      >
+        <td>
+  {item.produce || (
+    activeTable === 'value'
+      ? 'Overall Value of Supplies'
+      : activeTable === 'volume'
+        ? 'Overall Volume Index'
+        : activeTable === 'priceIndex'
+          ? 'Overall Price Index'
+          : activeTable === 'sellers'
+            ? 'Overall Number of Sellers'
+            : 'Overall Total'
+  )}
+</td>
+
+        {selectedQuarter === 'mar2026' && (
+          <td>{item.mar2025?.toLocaleString() ?? '-'}</td>
+        )}
+
+        <td>{item.jun2025?.toLocaleString() ?? '-'}</td>
+        <td>{item.sep2025?.toLocaleString() ?? '-'}</td>
+        <td>{item.dec2025?.toLocaleString() ?? '-'}</td>
+        <td>{item.mar2026?.toLocaleString() ?? '-'}</td>
+
+        {selectedQuarter === 'jun2026' && (
+          <td>{item.jun2026?.toLocaleString() ?? '-'}</td>
+        )}
+
+        <td
+          className={
+            quarterChange > 0
+              ? 'table-positive'
+              : quarterChange < 0
+                ? 'table-negative'
+                : ''
+          }
         >
-          <td>{item.produce}</td>
-          <td>{item.jun2025.toLocaleString()}</td>
-          <td>{item.sep2025.toLocaleString()}</td>
-          <td>{item.dec2025.toLocaleString()}</td>
-          <td>{item.mar2026.toLocaleString()}</td>
-          <td>{item.jun2026.toLocaleString()}</td>
+          {quarterChange > 0 ? '+' : ''}
+          {quarterChange ?? 0}%
+        </td>
 
-          <td
-            className={
-              item.quarterChange > 0
-                ? 'table-positive'
-                : item.quarterChange < 0
-                  ? 'table-negative'
-                  : ''
-            }
-          >
-            {item.quarterChange > 0 ? '+' : ''}
-            {item.quarterChange}%
-          </td>
-
-          <td
-            className={
-              item.annualChange > 0
-                ? 'table-positive'
-                : item.annualChange < 0
-                  ? 'table-negative'
-                  : ''
-            }
-          >
-            {item.annualChange > 0 ? '+' : ''}
-            {item.annualChange}%
-          </td>
-        </tr>
-      ))}
-    </tbody>
+        <td
+          className={
+            annualChange > 0
+              ? 'table-positive'
+              : annualChange < 0
+                ? 'table-negative'
+                : ''
+          }
+        >
+          {annualChange > 0 ? '+' : ''}
+          {annualChange ?? 0}%
+        </td>
+      </tr>
+    )
+  })}
+</tbody>
   </table>
 </div>
           </section>
