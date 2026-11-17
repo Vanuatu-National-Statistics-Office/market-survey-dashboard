@@ -1,3 +1,4 @@
+import { Capacitor } from '@capacitor/core'
 import vbosLogo from './assets/VBoS_logo.png'
 import { useEffect, useState } from 'react'
 import Highcharts from 'highcharts'
@@ -36,7 +37,8 @@ X,
 
 function App() {
 
- 
+  const isAndroidApp = Capacitor.getPlatform() === 'android'
+
   const [selectedCommodity, setSelectedCommodity] =
   useState<'all' | 'staple' | 'fruits' | 'vegetables'>('all')
 
@@ -1019,6 +1021,8 @@ const produceValueOptions: Highcharts.Options = {
   Dark
 </button>
 
+      {!isAndroidApp && (
+        <>
               <a
   className="action-button primary"
   href={currentQuarter.reportUrl}
@@ -1054,6 +1058,8 @@ const produceValueOptions: Highcharts.Options = {
 >
   <Printer size={18} />
 </button>
+  </>
+)}
             </div>
           </section>
 {activePage === 'overview' && (
