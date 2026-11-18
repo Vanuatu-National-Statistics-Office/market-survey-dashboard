@@ -58,6 +58,7 @@ const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 const [selectedQuarter, setSelectedQuarter] =
   useState<'mar2026' | 'jun2026'>('jun2026')
 const quarterConfig = {
+  // YoY figures are published rates from official March 2026 tables.
   mar2026: {
     label: 'March Quarter 2026',
     shortLabel: 'March Quarter',
@@ -67,15 +68,20 @@ const quarterConfig = {
     summary: {
       volumeIndex: 74,
       volumeChange: -37,
+      volumeAnnualChange: 181,
       priceIndex: 188,
       priceChange: 27,
+      priceAnnualChange: -9,
       totalValue: 897,
       totalValueChange: -37,
+      totalValueAnnualChange: 99,
       sellers: 183,
       sellersChange: -32,
+      sellersAnnualChange: 110,
     },
   },
 
+  // YoY figures are published rates from official June 2026 tables.
   jun2026: {
     label: 'June Quarter 2026',
     shortLabel: 'June Quarter',
@@ -85,12 +91,16 @@ const quarterConfig = {
     summary: {
       volumeIndex: 86,
       volumeChange: 17,
+      volumeAnnualChange: 21,
       priceIndex: 174,
       priceChange: -7,
+      priceAnnualChange: 9,
       totalValue: 1169,
       totalValueChange: 30,
+      totalValueAnnualChange: 43,
       sellers: 154,
       sellersChange: -16,
+      sellersAnnualChange: 8,
     },
   },
 } as const
@@ -113,6 +123,33 @@ const selectedCommodityLabel =
       : selectedCommodity === 'fruits'
         ? 'Fruits'
         : 'Vegetables'
+// Prefer the published year-on-year rate for each commodity group. The official
+// percentages may differ from ratios of displayed figures because figures are rounded.
+const calculateAnnualChange = (
+  row:
+    | {
+        annualChange: number
+        annualChangeByPeriod?: Partial<Record<'mar2026' | 'jun2026', number>>
+      }
+    | null
+    | undefined
+): number | null => {
+  if (!row) return null
+
+  const publishedRate = row.annualChangeByPeriod?.[selectedQuarter]
+  if (typeof publishedRate === 'number' && Number.isFinite(publishedRate)) {
+    return publishedRate
+  }
+
+  // The latest published rate on an individual row belongs to June 2026.
+  if (selectedQuarter === 'jun2026' && Number.isFinite(row.annualChange)) {
+    return row.annualChange
+  }
+
+  // No verified comparison: never substitute a quarter-on-quarter rate.
+  return null
+}
+
   const overviewGroupData = [
   {
     name: 'Staple Produce',
@@ -138,6 +175,15 @@ const selectedCommodityLabel =
     priceIndexData.find((item) => item.produce === group.key)?.[
       selectedQuarter
     ] ?? 0,
+
+  // Published same-quarter-last-year rates for each food group.
+  volumeAnnualChange: calculateAnnualChange(
+    volumeIndexData.find((item) => item.produce === group.key)
+  ),
+
+  priceAnnualChange: calculateAnnualChange(
+    priceIndexData.find((item) => item.produce === group.key)
+  ),
 
   value:
     valueOfSupplies.find((item) => item.produce === group.key)?.[
@@ -171,28 +217,46 @@ const selectedSellersRow = selectedGroupName
   ? sellersData.find((item) => item.produce === selectedGroupName)
   : null
 
-const calculateQuarterChange = (
-  row:
-    | {
-        dec2025: number
-        mar2026: number
-        quarterChange: number
-      }
-    | null
-    | undefined
-) => {
-  if (!row) return 0
+const renderAnnualChange = (change: number | null) => {
+  const referenceQuarter = selectedQuarter === 'jun2026' ? 'Jun 2025' : 'Mar 2025'
+  return (
+    <small
+      className={change === null || change === 0 ? '' : change > 0 ? 'positive' : 'negative'}
+      title={`Year-on-year comparison against ${referenceQuarter}`}
+    >
+      {change === null
+        ? 'YoY change unavailable'
+        : `${change > 0 ? '▲ +' : change < 0 ? '▼ ' : '— '}${change}% YoY (vs ${referenceQuarter})`}
+    </small>
+  )
+}
 
-  if (selectedQuarter === 'jun2026') {
-    return row.quarterChange
-  }
+// Compact accessible year-on-year change label for the three food-group cards.
+const renderGroupChange = (change: number | null, measure: 'Volume' | 'Price') => {
+  const validChange = change !== null && Number.isFinite(change) ? change : null
+  const comparisonPeriod = selectedQuarter === 'jun2026' ? 'Jun 2025' : 'Mar 2025'
+  const direction = validChange === null ? '' : validChange > 0 ? '▲ +' : validChange < 0 ? '▼ ' : '— '
+  const message = validChange !== null
+    ? `${direction}${validChange}% YoY vs ${comparisonPeriod}`
+    : 'YoY unavailable'
 
-  if (row.dec2025 === 0) {
-    return row.mar2026 === 0 ? 0 : 100
-  }
-
-  return Math.round(
-    ((row.mar2026 - row.dec2025) / row.dec2025) * 100
+  return (
+    <div style={{ margin: '2px 0 12px', lineHeight: 1.4 }}>
+      <small
+        title={`${measure} Index: change compared with the same quarter last year`}
+        style={{
+          display: 'inline-block',
+          padding: '4px 8px',
+          borderRadius: '999px',
+          fontSize: '11px',
+          fontWeight: 700,
+          backgroundColor: validChange === null ? '#e2e8f0' : validChange < 0 ? '#fee2e2' : '#dcfce7',
+          color: validChange === null ? '#334155' : validChange < 0 ? '#991b1b' : '#166534',
+        }}
+      >
+        {measure}: {message}
+      </small>
+    </div>
   )
 }
 
@@ -200,33 +264,34 @@ const currentVolumeIndex = selectedVolumeRow
   ? selectedVolumeRow[selectedQuarter]
   : currentQuarter.summary.volumeIndex
 
-const currentVolumeChange = selectedVolumeRow
-  ? calculateQuarterChange(selectedVolumeRow)
-  : currentQuarter.summary.volumeChange
-
 const currentPriceIndex = selectedPriceRow
   ? selectedPriceRow[selectedQuarter]
   : currentQuarter.summary.priceIndex
-
-const currentPriceChange = selectedPriceRow
-  ? calculateQuarterChange(selectedPriceRow)
-  : currentQuarter.summary.priceChange
 
 const currentTotalValue = selectedValueRow
   ? selectedValueRow[selectedQuarter]
   : currentQuarter.summary.totalValue
 
-const currentTotalValueChange = selectedValueRow
-  ? calculateQuarterChange(selectedValueRow)
-  : currentQuarter.summary.totalValueChange
-
 const currentSellers = selectedSellersRow
   ? selectedSellersRow[selectedQuarter]
   : currentQuarter.summary.sellers
 
-const currentSellersChange = selectedSellersRow
-  ? calculateQuarterChange(selectedSellersRow)
-  : currentQuarter.summary.sellersChange
+const currentVolumeAnnualChange = selectedVolumeRow
+  ? calculateAnnualChange(selectedVolumeRow)
+  : currentQuarter.summary.volumeAnnualChange
+
+const currentPriceAnnualChange = selectedPriceRow
+  ? calculateAnnualChange(selectedPriceRow)
+  : currentQuarter.summary.priceAnnualChange
+
+const currentTotalValueAnnualChange = selectedValueRow
+  ? calculateAnnualChange(selectedValueRow)
+  : currentQuarter.summary.totalValueAnnualChange
+
+const currentSellersAnnualChange = selectedSellersRow
+  ? calculateAnnualChange(selectedSellersRow)
+  : currentQuarter.summary.sellersAnnualChange
+
     const [activeTable, setActiveTable] =
   useState<
     'quantity' | 'price' | 'value' | 'volume' | 'priceIndex' | 'sellers'
@@ -844,17 +909,18 @@ if (isAndroidApp && showCoverPage) {
     <div className={isAndroidApp ? 'app-shell android-app' : 'app-shell'}>
       {/* HEADER */}
       <header className="hero">
+        
         {/* ANDROID - BACK TO COVER PAGE */}
-{isAndroidApp && (
-  <button
-    type="button"
-    className="android-back-home"
-    onClick={() => setShowCoverPage(true)}
-  >
-    <Home size={18} />
-    <span>Back to Home</span>
-  </button>
-)}
+        {isAndroidApp && (
+          <button
+            type="button"
+            className="android-back-home"
+            onClick={() => setShowCoverPage(true)}
+          >
+            <Home size={18} />
+            <span>Back to Home</span>
+          </button>
+        )}
         <div className="hero-brand">
          <div className="brand-logo">
   <img src={vbosLogo} alt="Vanuatu Bureau of Statistics" />
@@ -1124,10 +1190,7 @@ if (isAndroidApp && showCoverPage) {
     : 'Overall Volume Index'}
 </span>
                 <strong>{currentVolumeIndex}</strong>
-                <small className={currentVolumeChange >= 0 ? 'positive' : 'negative'}>
-                    {currentVolumeChange >= 0 ? '▲' : '▼'} {currentVolumeChange > 0 ? '+' : ''}
-                    {currentVolumeChange}% vs previous quarter
-                </small>
+                {renderAnnualChange(currentVolumeAnnualChange)}
               </div>
             </article>
 
@@ -1143,10 +1206,7 @@ if (isAndroidApp && showCoverPage) {
 </span>
                   <strong>{currentPriceIndex}</strong>
 
-                  <small className={currentPriceChange >= 0 ? 'positive' : 'negative'}>
-                       {currentPriceChange >= 0 ? '▲' : '▼'} {currentPriceChange > 0 ? '+' : ''}
-                        {currentPriceChange}% vs previous quarter
-                     </small>
+                  {renderAnnualChange(currentPriceAnnualChange)}
               </div>
             </article>
 
@@ -1165,11 +1225,7 @@ if (isAndroidApp && showCoverPage) {
   VT {Math.round(currentTotalValue * 1000).toLocaleString()}
 </strong>
 
-                       <small className={currentTotalValueChange >= 0 ? 'positive' : 'negative'}>
-                       {currentTotalValueChange >= 0 ? '▲' : '▼'}{' '}
-                       {currentTotalValueChange > 0 ? '+' : ''}
-                       {currentTotalValueChange}% vs previous quarter
-                     </small>
+                       {renderAnnualChange(currentTotalValueAnnualChange)}
               </div>
             </article>
 
@@ -1186,11 +1242,7 @@ if (isAndroidApp && showCoverPage) {
 
                   <strong>{currentSellers}</strong>
 
-                    <small className={currentSellersChange >= 0 ? 'positive' : 'negative'}>
-                    {currentSellersChange >= 0 ? '▲' : '▼'}{' '}
-                    {currentSellersChange > 0 ? '+' : ''}
-                    {currentSellersChange}% vs previous quarter
-                   </small>
+                    {renderAnnualChange(currentSellersAnnualChange)}
               </div>
             </article>
             </section>
@@ -1200,7 +1252,7 @@ if (isAndroidApp && showCoverPage) {
     <div className="panel-heading">
       <div>
         <h2>Commodity Group Snapshot</h2>
-        <p>{currentQuarter.label}</p>
+        <p>{currentQuarter.label} · Year-on-year changes in volume and prices</p>
       </div>
       <Layers3 size={22} />
     </div>
@@ -1214,11 +1266,13 @@ if (isAndroidApp && showCoverPage) {
             <span>Volume Index</span>
             <strong>{group.volume}</strong>
           </div>
+          {renderGroupChange(group.volumeAnnualChange, 'Volume')}
 
           <div className="overview-metric">
             <span>Price Index</span>
             <strong>{group.price}</strong>
           </div>
+          {renderGroupChange(group.priceAnnualChange, 'Price')}
 
           <div className="overview-metric">
             <span>Value</span>
@@ -1232,12 +1286,16 @@ if (isAndroidApp && showCoverPage) {
         </div>
       ))}
     </div>
+    <p style={{ fontSize: '12px', opacity: 0.8, margin: '12px 2px 0' }}>
+      Volume change reflects the Volume Index for quantities supplied, not a direct measure of sales.
+      Year-on-year compares with {selectedQuarter === 'jun2026' ? 'June 2025' : 'March 2025'}.
+    </p>
   </article>
   <article className="panel overview-highlights">
   <div className="panel-heading">
     <div>
       <h2>{currentQuarter.shortLabel} Highlights</h2>
-      <p>Key market movements</p>
+      <p>Quarter-on-quarter movements (secondary comparison)</p>
     </div>
     <BarChart3 size={22} />
   </div>
@@ -1371,11 +1429,7 @@ if (isAndroidApp && showCoverPage) {
       <span>Volume Index</span>
       <strong>{currentVolumeIndex}</strong>
 
-      <small className={currentVolumeChange >= 0 ? 'positive' : 'negative'}>
-        {currentVolumeChange >= 0 ? '▲' : '▼'}{' '}
-        {currentVolumeChange > 0 ? '+' : ''}
-        {currentVolumeChange}% vs previous quarter
-      </small>
+      {renderAnnualChange(currentVolumeAnnualChange)}
     </div>
   </div>
 
@@ -1388,11 +1442,7 @@ if (isAndroidApp && showCoverPage) {
       <span>Price Index</span>
       <strong>{currentPriceIndex}</strong>
 
-      <small className={currentPriceChange >= 0 ? 'positive' : 'negative'}>
-        {currentPriceChange >= 0 ? '▲' : '▼'}{' '}
-        {currentPriceChange > 0 ? '+' : ''}
-        {currentPriceChange}% vs previous quarter
-      </small>
+      {renderAnnualChange(currentPriceAnnualChange)}
     </div>
   </div>
 
@@ -1407,11 +1457,7 @@ if (isAndroidApp && showCoverPage) {
         VT {Math.round(currentTotalValue * 1000).toLocaleString()}
       </strong>
 
-      <small className={currentTotalValueChange >= 0 ? 'positive' : 'negative'}>
-        {currentTotalValueChange >= 0 ? '▲' : '▼'}{' '}
-        {currentTotalValueChange > 0 ? '+' : ''}
-        {currentTotalValueChange}% vs previous quarter
-      </small>
+      {renderAnnualChange(currentTotalValueAnnualChange)}
     </div>
   </div>
 
@@ -1424,11 +1470,7 @@ if (isAndroidApp && showCoverPage) {
       <span>Average Sellers</span>
       <strong>{currentSellers}</strong>
 
-      <small className={currentSellersChange >= 0 ? 'positive' : 'negative'}>
-        {currentSellersChange >= 0 ? '▲' : '▼'}{' '}
-        {currentSellersChange > 0 ? '+' : ''}
-        {currentSellersChange}% vs previous quarter
-      </small>
+      {renderAnnualChange(currentSellersAnnualChange)}
     </div>
   </div>
 
