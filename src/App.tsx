@@ -1,5 +1,6 @@
 import { Capacitor } from '@capacitor/core'
 import vbosLogo from './assets/VBoS_logo.png'
+import marketSurveyCover from './assets/market-survey-cover.jpg'
 import { useEffect, useState } from 'react'
 import Highcharts from 'highcharts'
 import { HighchartsReact } from 'highcharts-react-official'
@@ -38,6 +39,7 @@ X,
 function App() {
 
   const isAndroidApp = Capacitor.getPlatform() === 'android'
+  const [showCoverPage, setShowCoverPage] = useState(isAndroidApp)
 
   const [selectedCommodity, setSelectedCommodity] =
   useState<'all' | 'staple' | 'fruits' | 'vegetables'>('all')
@@ -804,10 +806,55 @@ const produceValueOptions: Highcharts.Options = {
     },
   ],
 }
+
+// ANDROID COVER PAGE
+if (isAndroidApp && showCoverPage) {
+  return (
+    <div className="android-cover-screen">
+
+      <img
+        src={marketSurveyCover}
+        alt="VBoS Market Survey Cover"
+        className="android-cover-image"
+      />
+        {/* DYNAMIC REPORTING PERIOD */}
+        <div className="android-cover-period">
+          <span>Reporting Period</span>
+
+          <strong>{currentQuarter.label}</strong>
+
+          <small>
+            Release Date: {currentQuarter.releaseDate}
+          </small>
+        </div>
+      <button
+        type="button"
+        className="android-cover-enter"
+        onClick={() => setShowCoverPage(false)}
+      >
+        Enter Dashboard →
+      </button>
+
+    </div>
+  )
+}
+
+// EXISTING DASHBOARD
   return (
     <div className={isAndroidApp ? 'app-shell android-app' : 'app-shell'}>
       {/* HEADER */}
       <header className="hero">
+        {/* ANDROID - BACK TO COVER PAGE */}
+{isAndroidApp && (
+  <button
+    type="button"
+    className="android-back-home"
+    onClick={() => setShowCoverPage(true)}
+  >
+    <Home size={18} />
+    <span>Back to Home</span>
+  </button>
+)}
         <div className="hero-brand">
          <div className="brand-logo">
   <img src={vbosLogo} alt="Vanuatu Bureau of Statistics" />
