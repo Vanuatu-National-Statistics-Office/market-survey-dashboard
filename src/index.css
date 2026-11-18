@@ -1704,3 +1704,455 @@ html[data-theme='dark'] .highcharts-data-label text {
   background: #256b2a;
   border-color: #256b2a;
 }
+/* =========================================
+   ANDROID APP — MODERN MOBILE DESIGN
+   ========================================= */
+   /* Android KPI cards - 2 column layout */
+
+.android-app .kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.android-app .kpi-card {
+  min-width: 0;
+  padding: 14px;
+  border-radius: 18px;
+}
+
+.android-app .kpi-card strong {
+  font-size: clamp(1.2rem, 5vw, 1.7rem);
+}
+/* Modern Android KPI card colors */
+
+.android-app .kpi-card.volume {
+  background: linear-gradient(135deg, #0875c9, #034b91);
+  color: white;
+}
+
+.android-app .kpi-card.price {
+  background: linear-gradient(135deg, #00a995, #006f78);
+  color: white;
+}
+
+.android-app .kpi-card.value {
+  background: linear-gradient(135deg, #8050db, #49329a);
+  color: white;
+}
+
+.android-app .kpi-card.sellers {
+  background: linear-gradient(135deg, #ffab21, #d66b09);
+  color: white;
+}
+
+.android-app .kpi-card span,
+.android-app .kpi-card strong {
+  color: white;
+}
+/* Android - Modern KPI card refinements */
+
+.android-app .kpi-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  min-height: 150px;
+}
+
+.android-app .kpi-card > div:last-child {
+  width: 100%;
+  min-width: 0;
+}
+
+.android-app .kpi-card strong {
+  display: block;
+  font-size: clamp(1rem, 4vw, 1.3rem);
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.android-app .kpi-card small {
+  font-size: 0.7rem;
+  line-height: 1.3;
+}
+/* Modern Android Header */
+
+.android-app .hero {
+  background: linear-gradient(135deg, #062b49, #087c89);
+  padding: 22px 16px 24px;
+}
+
+.android-app .hero-brand {
+  align-items: center;
+  gap: 12px;
+}
+
+.android-app .hero h1 {
+  font-size: 1.35rem;
+  line-height: 1.25;
+  letter-spacing: -0.3px;
+}
+/* =========================================
+   ANDROID - MODERN BOTTOM NAVIGATION
+   ========================================= */
+
+.android-app {
+  padding-bottom: 95px;
+}
+
+.android-app .android-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+  padding: 10px 8px calc(10px + env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(135deg, #062b49, #073b59);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.android-app .android-bottom-nav button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-width: 0;
+  min-height: 58px;
+  padding: 8px 2px;
+  border: none;
+  border-radius: 14px;
+  background: transparent;
+  color: #cbd5e1;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.android-app .android-bottom-nav button.active {
+  background: linear-gradient(135deg, #00b8c4, #087f93);
+  color: white;
+}
+
+.android-app .android-bottom-nav button svg {
+  width: 22px;
+  height: 22px;
+}
+/* Android - Swipeable Table Buttons */
+
+.android-app .table-tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 8px;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+}
+
+.android-app .table-tabs button {
+  flex: 0 0 145px;
+  min-width: 145px;
+  white-space: normal;
+  scroll-snap-align: start;
+}
+/* Android - Scrollable Statistical Tables */
+
+.android-app .data-table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Allow horizontal scrolling */
+
+.android-app .market-table {
+  min-width: 850px;
+}
+
+/* Keep Product column visible */
+
+.android-app .market-table th:first-child,
+.android-app .market-table td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  min-width: 170px;
+  background: #122b38;
+  border-right: 1px solid #365665;
+}
+
+/* Product column header */
+
+.android-app .market-table thead th:first-child {
+  z-index: 3;
+  background: #19435c;
+}
+/* Android - Light Mode Sticky Product Column */
+
+:root[data-theme="light"] .android-app
+.market-table tbody tr > :first-child {
+  background: #f5f9fc;
+  color: #173346;
+}
+
+:root[data-theme="light"] .android-app
+.market-table tbody tr > :first-child * {
+  color: #173346;
+}
+
+:root[data-theme="light"] .android-app
+.market-table tbody tr:nth-child(even) > :first-child {
+  background: #eaf1f6;
+}
+/* Android - Compact Modern Filters */
+
+.android-app .toolbar {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  align-items: end;
+}
+
+/* Keep menu button on its own row */
+
+.android-app .toolbar > .mobile-menu-button {
+  grid-column: 1 / -1;
+  justify-self: start;
+}
+
+/* Quarter and Year side by side */
+
+.android-app .toolbar > .filter-control {
+  width: 100%;
+  min-width: 0;
+}
+
+.android-app .filter-control select {
+  width: 100%;
+  min-width: 0;
+}
+
+/* Commodity Group takes full width */
+
+.android-app .toolbar > .commodity-filter {
+  grid-column: 1 / -1;
+}
+
+/* Light and Dark buttons side by side */
+
+.android-app .toolbar > .toolbar-actions {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  width: 100%;
+}
+/* Android - Force Compact Filter Layout */
+
+.android-app .toolbar {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  gap: 10px;
+}
+
+.android-app .toolbar > .filter-control:not(.commodity-filter) {
+  grid-column: auto !important;
+  width: 100%;
+  min-width: 0;
+}
+
+.android-app .toolbar > .commodity-filter,
+.android-app .toolbar > .toolbar-actions,
+.android-app .toolbar > .mobile-menu-button {
+  grid-column: 1 / -1;
+}
+/* Android - Modern Chart Design */
+
+.android-app .chart-box {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 12px 8px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+/* Light Mode Chart Container */
+
+:root[data-theme="light"] .android-app .chart-box {
+  background: #ffffff;
+  border-color: #e1e8ee;
+}
+/* =========================================
+   VBoS ANDROID APP - COVER PAGE
+   ========================================= */
+
+.android-cover-screen {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: #062b49;
+}
+
+/* Full-screen cover image */
+
+.android-cover-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* Gold Enter Dashboard button */
+
+.android-cover-enter {
+  position: absolute;
+  left: 50%;
+  bottom: calc(30px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+
+  width: 82%;
+  max-width: 350px;
+  padding: 16px 20px;
+
+  background: linear-gradient(135deg, #ffe07a, #f5ae24);
+  color: #09283b;
+
+  border: none;
+  border-radius: 50px;
+
+  font-size: 17px;
+  font-weight: 800;
+  white-space: nowrap;
+
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+}
+
+.android-cover-enter:active {
+  transform: translateX(-50%) scale(0.97);
+}
+/* =========================================
+   ANDROID COVER - REPORTING PERIOD PANEL
+   ========================================= */
+
+.android-cover-period {
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 84%;
+  max-width: 360px;
+  box-sizing: border-box;
+  padding: 20px 18px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(12, 62, 85, 0.78),
+    rgba(12, 145, 152, 0.55)
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 22px;
+  backdrop-filter: blur(10px);
+
+  color: #ffffff;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+}
+
+.android-cover-period span {
+  font-size: 12px;
+  color: #ffd166;
+  font-weight: 600;
+}
+
+.android-cover-period strong {
+  font-size: clamp(19px, 5vw, 25px);
+  line-height: 1.2;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.android-cover-period small {
+  font-size: 12px;
+  line-height: 1.4;
+  color: #e5f3f6;
+}
+/* =========================================
+   ANDROID - BACK TO HOME BUTTON
+   ========================================= */
+
+.android-app .android-back-home {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  margin-bottom: 18px;
+  padding: 10px 16px;
+
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffd166;
+
+  border: 1px solid rgba(255, 209, 102, 0.5);
+  border-radius: 50px;
+
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+
+  transition: background 0.2s ease;
+}
+
+.android-app .android-back-home:active {
+  background: rgba(255, 209, 102, 0.25);
+}
+
+.android-app .android-back-home svg {
+  width: 18px;
+  height: 18px;
+}
+/* Android - Fix Back to Home Button Visibility */
+
+.android-app .hero > .android-back-home {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  position: relative;
+  z-index: 50;
+
+  width: fit-content;
+  margin: 0 0 15px 0;
+  padding: 10px 16px;
+
+  background: #ffd166;
+  color: #09283b;
+
+  border: none;
+  border-radius: 30px;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  visibility: visible !important;
+  opacity: 1 !important;
+}
